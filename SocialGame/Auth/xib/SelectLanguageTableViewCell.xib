@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Grandview.ttf">
+            <string>Grandview</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SelectLanguageTableViewCell" customModule="SocialGame" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="388" height="86"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h1T-Ab-gLJ">
+                    <rect key="frame" x="0.0" y="0.0" width="388" height="86"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="English" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mke-p6-py4">
+                            <rect key="frame" x="20" y="10" width="318" height="66"/>
+                            <fontDescription key="fontDescription" name="Grandview" family="Grandview" pointSize="16"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="box" translatesAutoresizingMaskIntoConstraints="NO" id="iOU-Vb-ajR">
+                            <rect key="frame" x="348" y="33" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="aVv-Yl-4cG"/>
+                                <constraint firstAttribute="width" secondItem="iOU-Vb-ajR" secondAttribute="height" id="ffE-Py-sH0"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="iOU-Vb-ajR" firstAttribute="centerY" secondItem="h1T-Ab-gLJ" secondAttribute="centerY" id="3xh-iJ-mvO"/>
+                        <constraint firstItem="iOU-Vb-ajR" firstAttribute="leading" secondItem="mke-p6-py4" secondAttribute="trailing" constant="10" id="8cf-iS-OsN"/>
+                        <constraint firstAttribute="bottom" secondItem="mke-p6-py4" secondAttribute="bottom" constant="10" id="sG3-WO-vQt"/>
+                        <constraint firstItem="mke-p6-py4" firstAttribute="leading" secondItem="h1T-Ab-gLJ" secondAttribute="leading" constant="20" id="u9x-h6-fWK"/>
+                        <constraint firstItem="mke-p6-py4" firstAttribute="top" secondItem="h1T-Ab-gLJ" secondAttribute="top" constant="10" id="w29-dn-mzj"/>
+                        <constraint firstAttribute="trailing" secondItem="iOU-Vb-ajR" secondAttribute="trailing" constant="20" id="y5l-9R-WGU"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="h1T-Ab-gLJ" secondAttribute="bottom" id="594-gH-vJ7"/>
+                <constraint firstItem="h1T-Ab-gLJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="F4X-rh-oJi"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="h1T-Ab-gLJ" secondAttribute="trailing" id="FS5-AM-Cgl"/>
+                <constraint firstItem="h1T-Ab-gLJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="qBf-FR-OgY"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imgVwBox" destination="iOU-Vb-ajR" id="zFH-yo-dHw"/>
+                <outlet property="lblTitle" destination="mke-p6-py4" id="MYZ-QT-bcT"/>
+            </connections>
+            <point key="canvasLocation" x="135.87786259541986" y="-250"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="box" width="14" height="14"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
