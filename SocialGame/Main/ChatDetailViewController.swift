@@ -18,7 +18,11 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     let txtViewCommentMaxHeight: CGFloat = 100
     let txtViewCommentMinHeight: CGFloat = 34
-    var myID = ""
+    var strReceiverId = ""
+    var strSenderId = ""
+    var strProductId = ""
+    var strUsername = ""
+    
     var timer: Timer?
     var arrCount = Int()
     var initilizeFirstTimeOnly = Bool()
@@ -30,16 +34,10 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let dict = AppSharedData.getUserInfo()
-//        if dict["user_id"] != nil{
-//            self.myID = dict["user_id"] as! String
-//        }
-        
-        print("dictPrevious>>>>>\(dictPrevious)")
+
+        self.lblUserame.text = self.strUsername
         tblChatList.delegate = self
         tblChatList.dataSource = self
-        self.title = "Chat"
         self.txtVwChat.delegate = self
         
         if self.timer == nil{
@@ -65,7 +63,7 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @objc func updateTimer() {
         //example functionality
-       // self.call_GetChat()
+        self.call_GetChat()
     }
     @IBAction func btnOnBack(_ sender: Any) {
         onBackPressed()
@@ -84,7 +82,7 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let obj = self.arrChatMsg[indexPath.row]
         
-        if obj.strSenderId == myID{
+        if obj.strSenderId == self.strReceiverId{
             cell.vwMyMsg.isHidden = false
             cell.lblMyMsg.text = obj.strOpponentChatMessage
             cell.lblMyMsgTime.text = obj.strOpponentChatTime
@@ -191,7 +189,7 @@ extension ChatDetailViewController: UITextViewDelegate{
             return
         }else{
           
-           // self.call_SendTextMessageOnly(strText: self.txtVwChat.text!)
+            self.call_SendTextMessageOnly(strText: self.txtVwChat.text!)
         }
         self.txtVwChat.text = ""
     }
@@ -227,10 +225,15 @@ extension ChatDetailViewController{
 //        let receiverId = dictPrevious.GetString(forKey: "receiver_id")
 //        let senderId = dictPrevious.GetString(forKey: "sender_id")
         
+        let dict = ["receiver_id":self.strReceiverId,
+                    "sender_id":self.strSenderId,
+                    "product_id":self.strProductId]
         
-        let url  = WsUrl.url_GetConversation //+"?receiver_id=\(receiverId)&sender_id=\(senderId)" //\(dict["user_id"] ?? "")
+        print(dict)
         
-        objWebServiceManager.requestGet(strURL: url, params: [:], queryParams: [:], strCustomValidation: "") { [self] (response) in
+        let url  = WsUrl.url_GetChat //+"?receiver_id=\(receiverId)&sender_id=\(senderId)" //\(dict["user_id"] ?? "")
+        
+        objWebServiceManager.requestPost(strURL: url, queryParams: [:], params: dict, strCustomValidation: "", showIndicator: false) { [self] (response) in
             objWebServiceManager.hideIndicator()
             let status = (response["status"] as? Int)
             let message = (response["message"] as? String)
@@ -349,51 +352,47 @@ extension ChatDetailViewController{
     
     //MARK:- Send Text message Only
     
-//    func call_SendTextMessageOnly(strText:String){
-//        
-//        if !objWebServiceManager.isNetworkAvailable(){
-//            objWebServiceManager.hideIndicator()
-//            objAlert.showAlert(message: "No Internet Connection", title: "Alert", controller: self)
-//            return
-//        }
-//        
-//        // objWebServiceManager.showIndicator()
-//        
-//        let receiverId = dictPrevious.GetString(forKey: "receiver_id")
-//        let senderId = dictPrevious.GetString(forKey: "sender_id")
-//        
-//        
-//        
-//        let dicrParam = ["receiver_id":senderId,//Opponent ID
-//                         "sender_id":receiverId,//My ID
-//                         "type":"text",
-//                         "chat_message":strText]as [String:Any]
-//        
-//        objWebServiceManager.requestPost(strURL: WsUrl.url_insertChat, queryParams: [:], params: dicrParam, strCustomValidation: "", showIndicator: false) { (response) in
-//            objWebServiceManager.hideIndicator()
-//            let status = (response["status"] as? Int)
-//            let message = (response["message"] as? String)
-//            
-//            print(response)
-//            
-//            if let result = response["result"]as? String{
-//                if result == "successful"{
-//                    // self.isSendMessage = true
-//                    self.initilizeFirstTimeOnly = false
-//                    // self.call_GetChatList(strUserID: objAppShareData.UserDetail.strUserId, strSenderID: self.strSenderID)
-//                }
-//            }else{
-//                objWebServiceManager.hideIndicator()
-//                // objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
-//                
-//            }
-//            
-//            
-//        } failure: { (Error) in
-//            print(Error)
-//            objWebServiceManager.hideIndicator()
-//        }
-//    }
+    func call_SendTextMessageOnly(strText:String){
+        
+        if !objWebServiceManager.isNetworkAvailable(){
+            objWebServiceManager.hideIndicator()
+            objAlert.showAlert(message: "No Internet Connection", title: "Alert", controller: self)
+            return
+        }
+        
+        // objWebServiceManager.showIndicator()
+        
+        
+        let dicrParam = ["receiver_id":self.strSenderId,//Opponent ID
+                         "sender_id":self.strReceiverId,//My ID
+                         "product_id":self.strProductId,
+                         "chat_message":strText]as [String:Any]
+        
+        objWebServiceManager.requestPost(strURL: WsUrl.url_InsertChat, queryParams: [:], params: dicrParam, strCustomValidation: "", showIndicator: false) { (response) in
+            objWebServiceManager.hideIndicator()
+            let status = (response["status"] as? Int)
+            let message = (response["message"] as? String)
+            
+            print(response)
+            
+            if let result = response["result"]as? String{
+                if result == "successful"{
+                    // self.isSendMessage = true
+                    self.initilizeFirstTimeOnly = false
+                    // self.call_GetChatList(strUserID: objAppShareData.UserDetail.strUserId, strSenderID: self.strSenderID)
+                }
+            }else{
+                objWebServiceManager.hideIndicator()
+                // objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
+                
+            }
+            
+            
+        } failure: { (Error) in
+            print(Error)
+            objWebServiceManager.hideIndicator()
+        }
+    }
 }
 
 class ChatListCell:UITableViewCell {

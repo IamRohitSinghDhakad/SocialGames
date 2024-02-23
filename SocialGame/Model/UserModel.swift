@@ -28,7 +28,7 @@ class UserModel: NSObject {
     var noncriminal_certificate_image: String?
     var passport_image: String?
     var status: String?
-    var swiftCode: String?
+    var isFollowed: String?
     var type: String?
     var strUserId: String?
     var userImage: String?
@@ -42,6 +42,8 @@ class UserModel: NSObject {
     var rating:Double?
     var myRating : String?
     var category_id : String?
+    var strFollowers : String?
+    var strFollowing : String?
 
     
     
@@ -155,9 +157,12 @@ class UserModel: NSObject {
         if let value = dictionary["status"] as? String {
             status = value
         }
-        if let value = dictionary["swift_code"] as? String {
-            swiftCode = value
+        if let value = dictionary["isFollowed"] as? String {
+            isFollowed = value
+        }else  if let value = dictionary["isFollowed"] as? Int {
+            isFollowed = "\(value)"
         }
+        
         if let value = dictionary["type"] as? String {
             type = value
         }
@@ -171,6 +176,18 @@ class UserModel: NSObject {
         
         if let last_name = dictionary["last_name"] as? String {
             self.lastName = last_name
+        }
+        
+        if let value = dictionary["followers"] as? String {
+            self.strFollowers = value
+        }else if let value = dictionary["followers"] as? Int {
+            self.strFollowers = String(value)
+        }
+        
+        if let value = dictionary["followings"] as? String {
+            self.strFollowing = value
+        }else if let value = dictionary["followings"] as? Int {
+            self.strFollowing = String(value)
         }
     }
     

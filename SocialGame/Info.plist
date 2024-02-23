@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>App needs you location permission to post the game and show event in worldwide</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>App needs your library permission to set up your profile pic</string>
+	<key>NSCameraUsageDescription</key>
+	<string>App need your camera permission to set your profile pic</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

@@ -36,7 +36,7 @@ class AppSharedData: NSObject {
     var isUpdateHomeTable = Bool()
     var isLoginAsGuest = Bool()
     var userType = ""
-    
+    var uuidString = ""
     
     open var isLoggedIn: Bool {
         get {

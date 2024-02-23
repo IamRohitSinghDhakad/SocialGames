@@ -470,3 +470,51 @@ extension UIView {
         }
     }
 }
+
+extension String {
+    func formattedTimeRange(toTime toTimeStr: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        if let startDate = dateFormatter.date(from: self),
+           let endDate = dateFormatter.date(from: toTimeStr) {
+            
+            dateFormatter.dateFormat = "HH:mm"
+            
+            let startTime = dateFormatter.string(from: startDate)
+            let endTime = dateFormatter.string(from: endDate)
+            
+            return "\(startTime)-\(endTime) h"
+        }
+        
+        return nil
+    }
+    
+    func extractTime() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        if let date = dateFormatter.date(from: self) {
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "HH:mm"
+            return timeFormatter.string(from: date)
+        } else {
+            return nil // Invalid date string
+        }
+    }
+}
+
+extension String {
+    func formattedDate() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        if let date = dateFormatter.date(from: self) {
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            let formattedDate = dateFormatter.string(from: date)
+            return formattedDate
+        }
+        
+        return nil
+    }
+}

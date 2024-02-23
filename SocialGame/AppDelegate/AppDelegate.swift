@@ -48,6 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        objAppShareData.uuidString = UIDevice.current.identifierForVendor!.uuidString
+        
+        
         AuthNavigation()
         return true
     }

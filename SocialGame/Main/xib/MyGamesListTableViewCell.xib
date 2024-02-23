@@ -30,12 +30,15 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Arx-9T-z13">
                         <rect key="frame" x="10" y="5" width="381" height="100"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user 1" translatesAutoresizingMaskIntoConstraints="NO" id="k9F-bN-v87">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user 1" translatesAutoresizingMaskIntoConstraints="NO" id="k9F-bN-v87">
                                 <rect key="frame" x="10" y="20" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="k9F-bN-v87" secondAttribute="height" id="3vM-c8-EKZ"/>
                                     <constraint firstAttribute="width" constant="60" id="vW0-LG-lco"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="circle" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t0t-m5-3PL">
                                 <rect key="frame" x="78" y="14" width="283" height="17"/>

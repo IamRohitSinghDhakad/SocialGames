@@ -16,10 +16,13 @@ class CategoryListViewController: UIViewController {
     
     var categoryId = ""
     var categoryName = ""
+    var games: [Game] = []
+    var arrPlayers = [GetGameModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+       
         self.lblHeaderTitle.text = categoryName
         
         // Do any additional setup after loading the view.
@@ -29,6 +32,9 @@ class CategoryListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        call_GetCategoryList_Api(strCategoryID: self.categoryId)
+        
         DispatchQueue.main.async {
             self.vwHeader.setCornerRadiusIndiviualCorners(radius: 30.0, corners: [.bottomLeft, .bottomRight])
         }
@@ -40,7 +46,28 @@ class CategoryListViewController: UIViewController {
     }
     
     @IBAction func btnOnMapview(_ sender: Any) {
-        
+        let vc = self.mainStoryboard.instantiateViewController(withIdentifier: "MapLocationViewController")as! MapLocationViewController
+        vc.games = self.games
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+ 
+    
+    func getAllLatLong(){
+        for gameData in self.arrPlayers {
+            if let latitude = Double(gameData.lat ?? "0.0"),
+               let longitude = Double(gameData.lng ?? "0.0") {
+                let game = Game(
+                    gameId: gameData.game_id ?? "",
+                    categoryName: gameData.category_name ?? "",
+                    creatorName: gameData.creator_name ?? "",
+                    latitude: latitude,
+                    longitude: longitude
+                )
+                games.append(game)
+                print(game)
+            }
+        }
+
     }
     
 }
@@ -49,18 +76,36 @@ class CategoryListViewController: UIViewController {
 extension CategoryListViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return self.arrPlayers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GamesTableViewCell")as! GamesTableViewCell
         
+        let obj = self.arrPlayers[indexPath.row]
+        
+        cell.lblCategory.text = obj.creator_name
+        
+        cell.lblDate.text = obj.date
+        cell.lblTime.text = obj.time
+        
+        cell.lblLocation.text = obj.location
+        
+        let imageUrl  = obj.category_image
+        if imageUrl != "" {
+            let url = URL(string: imageUrl ?? "")
+            cell.imgVw.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "logo_one"))
+        }else{
+            cell.imgVw.image = #imageLiteral(resourceName: "logo_one")
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        pushVc(viewConterlerId: "GameDetailViewController")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "GameDetailViewController")as! GameDetailViewController
+        vc.objGameData = self.arrPlayers[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }
@@ -78,10 +123,11 @@ extension CategoryListViewController {
         
         objWebServiceManager.showIndicator()
         
-        let dicrParam = ["user_id":objAppShareData.UserDetail.strUserId!,
-                         "category_id":categoryId]as [String:Any]
+        let dicrParam = ["login_id":objAppShareData.UserDetail.strUserId!,
+                         "category_id":categoryId,
+                         "user_id":""]as [String:Any]
         
-        objWebServiceManager.requestGet(strURL: WsUrl.url_GetCategory, params: dicrParam, queryParams: [:], strCustomValidation: "") { (response) in
+        objWebServiceManager.requestGet(strURL: WsUrl.url_GetGame, params: dicrParam, queryParams: [:], strCustomValidation: "") { (response) in
             objWebServiceManager.hideIndicator()
             
             let status = (response["status"] as? Int)
@@ -90,12 +136,13 @@ extension CategoryListViewController {
             
             if status == MessageConstant.k_StatusCode{
                 if let user_details  = response["result"] as? [[String:Any]] {
+                    self.arrPlayers.removeAll()
                     for data in user_details{
-                     //   let obj = CategoryModel.init(from: data)
-                     //   self.arrCategory.append(obj)
+                        let obj = GetGameModel.init(from: data)
+                        self.arrPlayers.append(obj)
                     }
-                  //  self.cvCategories.reloadData()
-                    
+                    self.tblVw.reloadData()
+                    self.getAllLatLong()
                 }
                 else {
                     objAlert.showAlert(message: "Something went wrong!", title: "", controller: self)

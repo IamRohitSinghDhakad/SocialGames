@@ -15,6 +15,10 @@ class CategoryModel: NSObject {
     var category_name: String?
     var isSelected:Bool?
     
+    var category_icon: String?
+    var no_of_players : String?
+    var strDate : String?
+    var strTime : String?
     /*
      {
      "category_icon" = "uploads/category/121football.png";
@@ -26,6 +30,7 @@ class CategoryModel: NSObject {
      position = 1;
      status = 1;
      },
+     
      */
     
     
@@ -45,6 +50,16 @@ class CategoryModel: NSObject {
         if let value = dictionary["category_name"] as? String {
             category_name = value
         }
+        
+        if let value = dictionary["entrydt"] as? String {
+            strDate = value.formattedDate()
+        }
+        
+        if let value = dictionary["entrydt"] as? String {
+            strTime = value.extractTime()
+        }
+        
+        
         
         if let value = dictionary["selected"] as? String {
             selected = value

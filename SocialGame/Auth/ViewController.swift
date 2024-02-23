@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var imgVw: UIImageView!
     var counter = 2
     var timer:Timer?
     
