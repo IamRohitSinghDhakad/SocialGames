@@ -1,0 +1,240 @@
+
+/* Class = "UILabel"; text = "  "; ObjectID = "0DT-Su-Ui2"; */
+"0DT-Su-Ui2.text" = "  ";
+
+/* Class = "UILabel"; text = "02:00 pm"; ObjectID = "0PO-Hx-3Yf"; */
+"0PO-Hx-3Yf.text" = "02:00 pm";
+
+/* Class = "UIButton"; normalTitle = "SUBMIT"; ObjectID = "4Lh-mC-Src"; */
+"4Lh-mC-Src.normalTitle" = "SUBMIT";
+
+/* Class = "UILabel"; text = "Full Name"; ObjectID = "4nK-jx-TRz"; */
+"4nK-jx-TRz.text" = "Full Name";
+
+/* Class = "UILabel"; text = "    "; ObjectID = "5HU-2b-0WZ"; */
+"5HU-2b-0WZ.text" = "    ";
+
+/* Class = "UILabel"; text = "Following"; ObjectID = "6Xs-Q9-OZQ"; */
+"6Xs-Q9-OZQ.text" = "Following";
+
+/* Class = "UILabel"; text = "Location -"; ObjectID = "7BN-ru-lEc"; */
+"7BN-ru-lEc.text" = "Location -";
+
+/* Class = "UILabel"; text = "Location"; ObjectID = "7Xs-3F-Bgi"; */
+"7Xs-3F-Bgi.text" = "Location";
+
+/* Class = "UILabel"; text = "GAME DETAIL"; ObjectID = "8fZ-Sk-cdA"; */
+"8fZ-Sk-cdA.text" = "GAME DETAIL";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "Adb-0a-P8j"; */
+"Adb-0a-P8j.text" = "0";
+
+/* Class = "UILabel"; text = "  "; ObjectID = "BIA-V9-uAf"; */
+"BIA-V9-uAf.text" = "  ";
+
+/* Class = "UILabel"; text = "Following"; ObjectID = "BVC-Qf-mZp"; */
+"BVC-Qf-mZp.text" = "Following";
+
+/* Class = "UILabel"; text = "Privacy Policy"; ObjectID = "BgD-Ug-jsh"; */
+"BgD-Ug-jsh.text" = "Privacy Policy";
+
+/* Class = "UITabBarItem"; title = "Home"; ObjectID = "Bh0-NW-bep"; */
+"Bh0-NW-bep.title" = "Home";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Buh-du-bZ0"; */
+"Buh-du-bZ0.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "REQUEST FOR JOIN"; ObjectID = "C5T-QS-IIg"; */
+"C5T-QS-IIg.normalTitle" = "REQUEST FOR JOIN";
+
+/* Class = "UILabel"; text = "About Us"; ObjectID = "CFt-1p-fLc"; */
+"CFt-1p-fLc.text" = "About Us";
+
+/* Class = "UILabel"; text = "Followers"; ObjectID = "DuJ-29-D4l"; */
+"DuJ-29-D4l.text" = "Followers";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "E4d-lO-gxQ"; */
+"E4d-lO-gxQ.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Map"; ObjectID = "EmA-5A-3gS"; */
+"EmA-5A-3gS.text" = "Map";
+
+/* Class = "UILabel"; text = "Date -"; ObjectID = "Fh2-6k-ntG"; */
+"Fh2-6k-ntG.text" = "Date -";
+
+/* Class = "UILabel"; text = "CREATE GAME"; ObjectID = "GIl-Bv-Dh9"; */
+"GIl-Bv-Dh9.text" = "CREATE GAME";
+
+/* Class = "UILabel"; text = "   "; ObjectID = "GJz-Re-Kd1"; */
+"GJz-Re-Kd1.text" = "   ";
+
+/* Class = "UILabel"; text = "Email"; ObjectID = "GW5-Qx-Yb1"; */
+"GW5-Qx-Yb1.text" = "Email";
+
+/* Class = "UILabel"; text = "Time"; ObjectID = "GhX-XE-RJM"; */
+"GhX-XE-RJM.text" = "Time";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "JgX-XM-cjo"; */
+"JgX-XM-cjo.text" = "Date";
+
+/* Class = "UIButton"; normalTitle = "My Games"; ObjectID = "JqQ-YP-MNA"; */
+"JqQ-YP-MNA.normalTitle" = "My Games";
+
+/* Class = "UILabel"; text = "CHAT"; ObjectID = "Kg1-S8-YVm"; */
+"Kg1-S8-YVm.text" = "CHAT";
+
+/* Class = "UILabel"; text = "Old Password"; ObjectID = "LKS-6t-P8u"; */
+"LKS-6t-P8u.text" = "Old Password";
+
+/* Class = "UILabel"; text = "EDIT PROFILE"; ObjectID = "Ll9-Da-jqW"; */
+"Ll9-Da-jqW.text" = "EDIT PROFILE";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "MFc-6l-V1V"; */
+"MFc-6l-V1V.text" = "Label";
+
+/* Class = "UILabel"; text = "  "; ObjectID = "OzL-4G-MTD"; */
+"OzL-4G-MTD.text" = "  ";
+
+/* Class = "UILabel"; text = "Contact Us"; ObjectID = "P1e-Ak-hdD"; */
+"P1e-Ak-hdD.text" = "Contact Us";
+
+/* Class = "UILabel"; text = "Update Profile Image"; ObjectID = "PGz-1y-2rb"; */
+"PGz-1y-2rb.text" = "Update Profile Image";
+
+/* Class = "UILabel"; text = "Privacy Policy"; ObjectID = "QjC-AN-159"; */
+"QjC-AN-159.text" = "Privacy Policy";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Qlh-bi-Itt"; */
+"Qlh-bi-Itt.text" = "Label";
+
+/* Class = "UILabel"; text = "GAMES"; ObjectID = "RJb-Vr-uB7"; */
+"RJb-Vr-uB7.text" = "GAMES";
+
+/* Class = "UIButton"; normalTitle = "Joined Games"; ObjectID = "UVK-ZO-ARf"; */
+"UVK-ZO-ARf.normalTitle" = "Joined Games";
+
+/* Class = "UILabel"; text = "User"; ObjectID = "UWs-OF-wbZ"; */
+"UWs-OF-wbZ.text" = "User";
+
+/* Class = "UILabel"; text = "Location -"; ObjectID = "WSR-hm-Us0"; */
+"WSR-hm-Us0.text" = "Location -";
+
+/* Class = "UIButton"; normalTitle = "UPDATE"; ObjectID = "X72-ql-nVn"; */
+"X72-ql-nVn.normalTitle" = "UPDATE";
+
+/* Class = "UILabel"; text = "HOME"; ObjectID = "Yk6-qO-CSA"; */
+"Yk6-qO-CSA.text" = "HOME";
+
+/* Class = "UILabel"; text = "New Password"; ObjectID = "YzC-Qd-fVS"; */
+"YzC-Qd-fVS.text" = "New Password";
+
+/* Class = "UITabBarItem"; title = "Chat"; ObjectID = "ZEA-XJ-oeZ"; */
+"ZEA-XJ-oeZ.title" = "Chat";
+
+/* Class = "UILabel"; text = "02:00 pm"; ObjectID = "aEy-ZZ-wsJ"; */
+"aEy-ZZ-wsJ.text" = "02:00 pm";
+
+/* Class = "UILabel"; text = "Confirm Password"; ObjectID = "aFV-eE-ali"; */
+"aFV-eE-ali.text" = "Confirm Password";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "aeb-zo-cqW"; */
+"aeb-zo-cqW.text" = "Label";
+
+/* Class = "UILabel"; text = "Reset Password"; ObjectID = "bJC-Ob-gKW"; */
+"bJC-Ob-gKW.text" = "Reset Password";
+
+/* Class = "UILabel"; text = "Number of Players"; ObjectID = "bzT-1f-e45"; */
+"bzT-1f-e45.text" = "Number of Players";
+
+/* Class = "UILabel"; text = "Date -"; ObjectID = "c2t-jB-MGq"; */
+"c2t-jB-MGq.text" = "Date -";
+
+/* Class = "UILabel"; text = "07:00 PM"; ObjectID = "dAI-oF-uKt"; */
+"dAI-oF-uKt.text" = "07:00 PM";
+
+/* Class = "UILabel"; text = "2024-02-05"; ObjectID = "dk7-ad-fG2"; */
+"dk7-ad-fG2.text" = "2024-02-05";
+
+/* Class = "UILabel"; text = "Message"; ObjectID = "eK9-4v-m61"; */
+"eK9-4v-m61.text" = "Message";
+
+/* Class = "UILabel"; text = "CONTACT US"; ObjectID = "eu5-eL-Ghe"; */
+"eu5-eL-Ghe.text" = "CONTACT US";
+
+/* Class = "UIButton"; normalTitle = "CREATE"; ObjectID = "fjH-g8-BAZ"; */
+"fjH-g8-BAZ.normalTitle" = "CREATE";
+
+/* Class = "UILabel"; text = "All Requests"; ObjectID = "fyI-Lj-0Ot"; */
+"fyI-Lj-0Ot.text" = "All Requests";
+
+/* Class = "UILabel"; text = "Time -"; ObjectID = "gf7-KA-2en"; */
+"gf7-KA-2en.text" = "Time -";
+
+/* Class = "UILabel"; text = "Label  "; ObjectID = "h8V-fh-a1X"; */
+"h8V-fh-a1X.text" = "Label  ";
+
+/* Class = "UILabel"; text = "  "; ObjectID = "hE4-zn-EUU"; */
+"hE4-zn-EUU.text" = "  ";
+
+/* Class = "UILabel"; text = "Select Game"; ObjectID = "i9u-js-ToD"; */
+"i9u-js-ToD.text" = "Select Game";
+
+/* Class = "UILabel"; text = "Date of Birth"; ObjectID = "iX5-oF-upK"; */
+"iX5-oF-upK.text" = "Date of Birth";
+
+/* Class = "UILabel"; text = "Label  "; ObjectID = "k8R-aH-T8F"; */
+"k8R-aH-T8F.text" = "Label  ";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "kYl-gQ-RqF"; */
+"kYl-gQ-RqF.text" = "0";
+
+/* Class = "UILabel"; text = "Logout"; ObjectID = "mX2-RG-cID"; */
+"mX2-RG-cID.text" = "Logout";
+
+/* Class = "UILabel"; text = "Categories"; ObjectID = "mg5-10-gXn"; */
+"mg5-10-gXn.text" = "Categories";
+
+/* Class = "UITabBarItem"; title = "Games"; ObjectID = "nD3-t7-AWw"; */
+"nD3-t7-AWw.title" = "Games";
+
+/* Class = "UILabel"; text = "Time -"; ObjectID = "nPE-MW-XJo"; */
+"nPE-MW-XJo.text" = "Time -";
+
+/* Class = "UIButton"; normalTitle = "UPDATE"; ObjectID = "onh-ca-WB4"; */
+"onh-ca-WB4.normalTitle" = "UPDATE";
+
+/* Class = "UILabel"; text = "RESET PASSWORD"; ObjectID = "pXt-Br-N9R"; */
+"pXt-Br-N9R.text" = "RESET PASSWORD";
+
+/* Class = "UILabel"; text = " "; ObjectID = "qpo-3h-rrK"; */
+"qpo-3h-rrK.text" = " ";
+
+/* Class = "UILabel"; text = "GAME DETAIL"; ObjectID = "s5m-tP-t82"; */
+"s5m-tP-t82.text" = "GAME DETAIL";
+
+/* Class = "UILabel"; text = " "; ObjectID = "sZY-6u-S3Y"; */
+"sZY-6u-S3Y.text" = " ";
+
+/* Class = "UITabBarItem"; title = "Profile"; ObjectID = "tBH-ZE-UIe"; */
+"tBH-ZE-UIe.title" = "Profile";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "tKE-s6-O2D"; */
+"tKE-s6-O2D.text" = "0";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "ttb-z6-Xme"; */
+"ttb-z6-Xme.text" = "0";
+
+/* Class = "UILabel"; text = "  "; ObjectID = "uCz-Yk-2M6"; */
+"uCz-Yk-2M6.text" = "  ";
+
+/* Class = "UILabel"; text = "UserName"; ObjectID = "wvS-SW-SNb"; */
+"wvS-SW-SNb.text" = "UserName";
+
+/* Class = "UILabel"; text = "MY PROFILE"; ObjectID = "zFh-f9-4gp"; */
+"zFh-f9-4gp.text" = "MY PROFILE";
+
+/* Class = "UILabel"; text = "Mobile Number"; ObjectID = "ziA-0i-erp"; */
+"ziA-0i-erp.text" = "Mobile Number";
+
+/* Class = "UILabel"; text = "Followers"; ObjectID = "zkA-1G-5hR"; */
+"zkA-1G-5hR.text" = "Followers";

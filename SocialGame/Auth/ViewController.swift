@@ -48,7 +48,7 @@ class ViewController: UIViewController {
             appDelegate.window?.rootViewController = navController
         }
         else {
-            let vc = (self.authStoryboard.instantiateViewController(withIdentifier: "SelectLanguageViewController") as? SelectLanguageViewController)!
+            let vc = (self.authStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController)!
             let navController = UINavigationController(rootViewController: vc)
             navController.isNavigationBarHidden = true
             appDelegate.window?.rootViewController = navController

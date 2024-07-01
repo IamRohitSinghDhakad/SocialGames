@@ -22,6 +22,7 @@ class MapLocationViewController: UIViewController, MKMapViewDelegate, CLLocation
 
     @IBOutlet weak var mapVw: MKMapView!
     @IBOutlet weak var vwHeader: UIView!
+    @IBOutlet weak var lblHeader: UILabel!
     
     var locationManger = CLLocationManager()
     var games: [Game] = []

@@ -10,7 +10,8 @@ import UIKit
 
 
 
-let BASE_URL = "https://ambitious.in.net/Shubham/social-games/index.php/api/"//Local
+//let BASE_URL = "https://ambitious.in.net/Shubham/social-games/index.php/api/"//Local
+let BASE_URL = "https://socialgamepro.com/admin/index.php/api/"//Live
 let imageBaseUrl = "https://gms.mursko-sredisce.hr/"
 
 
@@ -37,15 +38,14 @@ struct WsUrl{
     static let url_InsertChat = BASE_URL + "insert_chat"
     static let url_GetChat = BASE_URL + "get_chat"
     static let url_UpdateProfile = BASE_URL + "update_profile"
-
+    static let url_ReportUser = BASE_URL + "report"
+    static let url_BlockUser = BASE_URL + "block"
+    static let url_DeleteAccunt = BASE_URL + "delete_user?user_id="
     
-//    static let url_getHomepage = BASE_URL + "get_homepage"
-//    static let url_GetLikedPost = BASE_URL + "get_liked_posts"
-//    static let url_LikePost = BASE_URL + "like_post"
-//    static let url_UpdateAppointment = BASE_URL + "update_appointment"
-
     
-
+    
+//https://socialgamepro.com/admin/index.php/api/block?user_id=2&blocked_by=3
+//https://socialgamepro.com/admin/index.php/api/report?user_id=2&reported_by=3
 }
 
 

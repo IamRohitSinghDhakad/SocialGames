@@ -11,8 +11,12 @@ class ContactUsViewController: UIViewController,UINavigationControllerDelegate {
 
     @IBOutlet weak var txtVwMsg: RDTextView!
     @IBOutlet weak var tfTitle: UITextField!
+    @IBOutlet weak var lblHeadingContactUs: UILabel!
     @IBOutlet weak var imgvw: UIImageView!
     
+    @IBOutlet weak var btnSubmit: UIButton!
+    @IBOutlet weak var lblMessage: UILabel!
+    @IBOutlet weak var lbltitle: UILabel!
     var imagePicker = UIImagePickerController()
     var pickedImage:UIImage?
     
@@ -21,6 +25,15 @@ class ContactUsViewController: UIViewController,UINavigationControllerDelegate {
 
         self.imagePicker.delegate = self
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.lbltitle.text = "Title".localized()
+        self.lblHeadingContactUs.text = "Contact Us".localized()
+        self.lblMessage.text = "Message".localized()
+        self.btnSubmit.setTitle("Submit".localized(), for: .normal)
     }
     
     @IBAction func btnOnBack(_ sender: Any) {
@@ -37,9 +50,9 @@ class ContactUsViewController: UIViewController,UINavigationControllerDelegate {
         self.txtVwMsg.text = self.txtVwMsg.text?.trim()
         
         if tfTitle.text == ""{
-            objAlert.showAlert(message: "Please enter problem", controller: self)
+            objAlert.showAlert(message: "Enter Title".localized(), controller: self)
         }else  if txtVwMsg.text == ""{
-            objAlert.showAlert(message: "Please enter message", controller: self)
+            objAlert.showAlert(message: "Enter message".localized(), controller: self)
         }else{
             self.callWebserviceForContactUs()
         }
@@ -173,7 +186,7 @@ extension ContactUsViewController {
                     return
                 }
                 
-                objAlert.showAlertSingleButtonCallBack(alertBtn: "OK", title: "", message: "Submitted Succesfully", controller: self) {
+                objAlert.showAlertSingleButtonCallBack(alertBtn: "OK", title: "", message: "Message submitted successfully".localized(), controller: self) {
                     self.onBackPressed()
                 }
                 

@@ -64,6 +64,9 @@
 		F9B1192E2B827BB500F6CF91 /* ChatListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9B1192D2B827BB500F6CF91 /* ChatListTableViewCell.xib */; };
 		F9B119302B827F3C00F6CF91 /* ChatDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1192F2B827F3C00F6CF91 /* ChatDetailViewController.swift */; };
 		F9B119322B8282D300F6CF91 /* ChatDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B119312B8282D300F6CF91 /* ChatDetailModel.swift */; };
+		F9B60A142C26DC9F0094A10E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9B60A132C26DC9F0094A10E /* GoogleService-Info.plist */; };
+		F9B60A2A2C26EE450094A10E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F9B60A282C26EE450094A10E /* Localizable.strings */; };
+		F9B60A2C2C26EE620094A10E /* LocalizationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B60A2B2C26EE620094A10E /* LocalizationSystem.swift */; };
 		F9C1DCCF2B81ECA100EEA285 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C1DCCE2B81ECA100EEA285 /* ResetPasswordViewController.swift */; };
 		F9C1DCD12B81EE1F00EEA285 /* WebVwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C1DCD02B81EE1E00EEA285 /* WebVwViewController.swift */; };
 		F9DDE52E2B7BCA3000EE1A80 /* CategoriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9DDE52D2B7BCA3000EE1A80 /* CategoriesCell.xib */; };
@@ -145,6 +148,36 @@
 		F9B1192D2B827BB500F6CF91 /* ChatListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatListTableViewCell.xib; sourceTree = "<group>"; };
 		F9B1192F2B827F3C00F6CF91 /* ChatDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailViewController.swift; sourceTree = "<group>"; };
 		F9B119312B8282D300F6CF91 /* ChatDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailModel.swift; sourceTree = "<group>"; };
+		F9B60A132C26DC9F0094A10E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F9B60A152C26ED770094A10E /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Main.strings; sourceTree = "<group>"; };
+		F9B60A162C26ED770094A10E /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F9B60A172C26ED880094A10E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		F9B60A182C26ED880094A10E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F9B60A192C26ED950094A10E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		F9B60A1A2C26ED960094A10E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F9B60A1B2C26ED9B0094A10E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		F9B60A1C2C26ED9B0094A10E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F9B60A1D2C26EDA40094A10E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		F9B60A1E2C26EDA40094A10E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F9B60A1F2C26EDB30094A10E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Main.strings; sourceTree = "<group>"; };
+		F9B60A202C26EDB40094A10E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F9B60A212C26EDB80094A10E /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
+		F9B60A222C26EDB80094A10E /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F9B60A232C26EDCA0094A10E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		F9B60A242C26EDCB0094A10E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		F9B60A252C26EDD30094A10E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		F9B60A262C26EDD30094A10E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F9B60A292C26EE450094A10E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F9B60A2B2C26EE620094A10E /* LocalizationSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizationSystem.swift; sourceTree = "<group>"; };
+		F9B60A2D2C26EE6B0094A10E /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F9B60A2E2C26EE6F0094A10E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		F9B60A2F2C26EE700094A10E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F9B60A302C26EE710094A10E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F9B60A312C26EE720094A10E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F9B60A322C26EE730094A10E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F9B60A332C26EE730094A10E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F9B60A342C26EE740094A10E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F9B60A352C26EE750094A10E /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F9C1DCCE2B81ECA100EEA285 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		F9C1DCD02B81EE1E00EEA285 /* WebVwViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebVwViewController.swift; sourceTree = "<group>"; };
 		F9DDE52D2B7BCA3000EE1A80 /* CategoriesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoriesCell.xib; sourceTree = "<group>"; };
@@ -345,6 +378,7 @@
 			children = (
 				F995135A2B80C6FA00BBC115 /* SocialGame.entitlements */,
 				F9AABC992B7FCC5900B42A00 /* Font */,
+				F9B60A272C26EE100094A10E /* Localization */,
 				F97C06022B7A8C0700793360 /* AppDelegate */,
 				F97C05CC2B7A7C5B00793360 /* Model */,
 				F97C05CA2B7A7C5B00793360 /* SharedClass */,
@@ -357,6 +391,7 @@
 				F9802DC22B77F69B00C528C8 /* Assets.xcassets */,
 				F9802DC42B77F69B00C528C8 /* LaunchScreen.storyboard */,
 				F995135B2B80CBEB00BBC115 /* credentials.plist */,
+				F9B60A132C26DC9F0094A10E /* GoogleService-Info.plist */,
 				F9802DC72B77F69B00C528C8 /* Info.plist */,
 			);
 			path = SocialGame;
@@ -369,6 +404,15 @@
 				F9AABC9B2B7FCC6600B42A00 /* GrandviewBold.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		F9B60A272C26EE100094A10E /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				F9B60A2B2C26EE620094A10E /* LocalizationSystem.swift */,
+				F9B60A282C26EE450094A10E /* Localizable.strings */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		F9DDE52C2B7BC9FF00EE1A80 /* xib */ = {
@@ -440,6 +484,15 @@
 			knownRegions = (
 				en,
 				Base,
+				tr,
+				ru,
+				fr,
+				de,
+				es,
+				it,
+				ar,
+				"zh-Hans",
+				ja,
 			);
 			mainGroup = F9802DAD2B77F69900C528C8;
 			productRefGroup = F9802DB72B77F69A00C528C8 /* Products */;
@@ -456,6 +509,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9B60A2A2C26EE450094A10E /* Localizable.strings in Resources */,
 				F9AABC9C2B7FCC6600B42A00 /* Grandview.ttf in Resources */,
 				F9DDE52E2B7BCA3000EE1A80 /* CategoriesCell.xib in Resources */,
 				F9EF46942B80F95100B3655C /* MyGamesListTableViewCell.xib in Resources */,
@@ -465,6 +519,7 @@
 				F97DF77C2B87446F00E7BB66 /* GameDetailPlayersCollectionViewCell.xib in Resources */,
 				F995135C2B80CBEB00BBC115 /* credentials.plist in Resources */,
 				F9802DC32B77F69B00C528C8 /* Assets.xcassets in Resources */,
+				F9B60A142C26DC9F0094A10E /* GoogleService-Info.plist in Resources */,
 				F9B1192E2B827BB500F6CF91 /* ChatListTableViewCell.xib in Resources */,
 				F97C05F52B7A7C5B00793360 /* century.ttf in Resources */,
 				F97C05FF2B7A858900793360 /* SelectLanguageTableViewCell.xib in Resources */,
@@ -557,6 +612,7 @@
 				F97C05C62B7A7A3D00793360 /* LoginViewController.swift in Sources */,
 				F97C05E82B7A7C5B00793360 /* CategoryModel.swift in Sources */,
 				F91269952B80E22F00C82251 /* CategoryListViewController.swift in Sources */,
+				F9B60A2C2C26EE620094A10E /* LocalizationSystem.swift in Sources */,
 				F97DF7852B87639D00E7BB66 /* Location.swift in Sources */,
 				F97DF77B2B87446F00E7BB66 /* GameDetailPlayersCollectionViewCell.swift in Sources */,
 				F97C05E92B7A7C5B00793360 /* LoginModel.swift in Sources */,
@@ -607,6 +663,15 @@
 			isa = PBXVariantGroup;
 			children = (
 				F9802DC02B77F69A00C528C8 /* Base */,
+				F9B60A152C26ED770094A10E /* tr */,
+				F9B60A172C26ED880094A10E /* ru */,
+				F9B60A192C26ED950094A10E /* fr */,
+				F9B60A1B2C26ED9B0094A10E /* de */,
+				F9B60A1D2C26EDA40094A10E /* es */,
+				F9B60A1F2C26EDB30094A10E /* it */,
+				F9B60A212C26EDB80094A10E /* ar */,
+				F9B60A232C26EDCA0094A10E /* zh-Hans */,
+				F9B60A252C26EDD30094A10E /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -615,8 +680,34 @@
 			isa = PBXVariantGroup;
 			children = (
 				F9802DC52B77F69B00C528C8 /* Base */,
+				F9B60A162C26ED770094A10E /* tr */,
+				F9B60A182C26ED880094A10E /* ru */,
+				F9B60A1A2C26ED960094A10E /* fr */,
+				F9B60A1C2C26ED9B0094A10E /* de */,
+				F9B60A1E2C26EDA40094A10E /* es */,
+				F9B60A202C26EDB40094A10E /* it */,
+				F9B60A222C26EDB80094A10E /* ar */,
+				F9B60A242C26EDCB0094A10E /* zh-Hans */,
+				F9B60A262C26EDD30094A10E /* ja */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F9B60A282C26EE450094A10E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F9B60A292C26EE450094A10E /* en */,
+				F9B60A2D2C26EE6B0094A10E /* ar */,
+				F9B60A2E2C26EE6F0094A10E /* zh-Hans */,
+				F9B60A2F2C26EE700094A10E /* fr */,
+				F9B60A302C26EE710094A10E /* it */,
+				F9B60A312C26EE720094A10E /* de */,
+				F9B60A322C26EE730094A10E /* ja */,
+				F9B60A332C26EE730094A10E /* ru */,
+				F9B60A342C26EE740094A10E /* es */,
+				F9B60A352C26EE750094A10E /* tr */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -627,6 +718,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -690,6 +782,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -750,12 +843,16 @@
 				CODE_SIGN_ENTITLEMENTS = SocialGame/SocialGame.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W98WV5F78G;
+				DEVELOPMENT_TEAM = QQG625577S;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SocialGame/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Friendship Games";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "App needs your library permission to set up your profile pic";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Our app does not request this permission or utilize this functionality but it is included in our info.plist since our app utilizes the react-native-permissions library, which references this permission in its code.";
-				INFOPLIST_KEY_NSCameraUsageDescription = "You have to describe the real usage for a human.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "App need your camera permission to set your profile pic";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "App needs you location permission to post the game and show event in worldwide";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "You have to describe the real usage for a human.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "You have to describe the real usage for a human.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "You have to describe the real usage for a human.";
@@ -770,8 +867,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ios.SocialGame;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.SocialGames;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -791,12 +888,16 @@
 				CODE_SIGN_ENTITLEMENTS = SocialGame/SocialGame.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W98WV5F78G;
+				DEVELOPMENT_TEAM = QQG625577S;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SocialGame/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Friendship Games";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "App needs your library permission to set up your profile pic";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Our app does not request this permission or utilize this functionality but it is included in our info.plist since our app utilizes the react-native-permissions library, which references this permission in its code.";
-				INFOPLIST_KEY_NSCameraUsageDescription = "You have to describe the real usage for a human.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "App need your camera permission to set your profile pic";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "App needs you location permission to post the game and show event in worldwide";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "You have to describe the real usage for a human.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "You have to describe the real usage for a human.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "You have to describe the real usage for a human.";
@@ -811,8 +912,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ios.SocialGame;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.SocialGames;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

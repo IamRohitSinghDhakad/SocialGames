@@ -17,6 +17,7 @@ class StoreModel: NSObject {
     var sender_name : String?
     var time_ago : String?
     var product_id : String?
+    var strBlocked : String = ""
     
     init(from dictionary: [String: Any]) {
         super.init()
@@ -52,6 +53,12 @@ class StoreModel: NSObject {
             self.product_id = "\(product_id)"
         }else if let product_id = dictionary["product_id"] as? String{
             self.product_id = product_id
+        }
+        
+        if let blocked = dictionary["blocked"] as? String{
+            self.strBlocked = blocked
+        }else  if let blocked = dictionary["blocked"] as? Int{
+            self.strBlocked = "\(blocked)"
         }
         
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -37,17 +37,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qf1-zy-NEa">
-                                <rect key="frame" x="83" y="36" width="36" height="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qf1-zy-NEa">
+                                <rect key="frame" x="83" y="36" width="40" height="15"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="36" id="Swk-BP-ECv"/>
+                                    <constraint firstAttribute="width" constant="40" id="Swk-BP-ECv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Grandview" family="Grandview" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jf3-wP-1lT">
-                                <rect key="frame" x="124" y="37.666666666666664" width="211" height="11.666666666666664"/>
+                                <rect key="frame" x="128" y="37.666666666666664" width="207" height="11.666666666666664"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="11.67" id="FK6-c6-zFD"/>
                                 </constraints>
@@ -55,17 +55,17 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y49-UX-uOD">
-                                <rect key="frame" x="83" y="52" width="38" height="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y49-UX-uOD">
+                                <rect key="frame" x="83" y="52" width="40" height="12"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="38" id="BP3-4P-Vdu"/>
+                                    <constraint firstAttribute="width" constant="40" id="BP3-4P-Vdu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Grandview" family="Grandview" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tu0-TR-imv">
-                                <rect key="frame" x="126" y="52" width="209" height="12.333333333333329"/>
+                                <rect key="frame" x="128" y="52" width="207" height="12.333333333333329"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="12.33" id="gb3-4I-Fwd"/>
                                 </constraints>
@@ -73,7 +73,7 @@
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Tz-3x-79Z">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location -" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Tz-3x-79Z">
                                 <rect key="frame" x="83" y="65" width="60" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="Rgn-7G-8Ro"/>
@@ -107,7 +107,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label  " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPt-sh-K1e">
-                                <rect key="frame" x="148" y="65" width="187" height="12"/>
+                                <rect key="frame" x="143" y="65" width="192" height="12"/>
                                 <fontDescription key="fontDescription" name="Grandview" family="Grandview" pointSize="12"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -117,7 +117,7 @@
                         <constraints>
                             <constraint firstItem="yPt-sh-K1e" firstAttribute="top" secondItem="2Tz-3x-79Z" secondAttribute="top" id="0Kf-UK-zVY"/>
                             <constraint firstItem="Jf3-wP-1lT" firstAttribute="top" secondItem="t2S-PQ-cYF" secondAttribute="bottom" constant="6.6699999999999999" id="3FA-Vj-CZw"/>
-                            <constraint firstItem="yPt-sh-K1e" firstAttribute="leading" secondItem="2Tz-3x-79Z" secondAttribute="trailing" constant="5" id="4C3-6s-8P4"/>
+                            <constraint firstItem="yPt-sh-K1e" firstAttribute="leading" secondItem="2Tz-3x-79Z" secondAttribute="trailing" id="4C3-6s-8P4"/>
                             <constraint firstItem="Tu0-TR-imv" firstAttribute="leading" secondItem="y49-UX-uOD" secondAttribute="trailing" constant="5" id="5Xv-EN-169"/>
                             <constraint firstItem="Tu0-TR-imv" firstAttribute="centerY" secondItem="y49-UX-uOD" secondAttribute="centerY" id="92C-nh-eiU"/>
                             <constraint firstItem="2Tz-3x-79Z" firstAttribute="top" secondItem="y49-UX-uOD" secondAttribute="bottom" constant="1" id="Dog-vT-L5S"/>

@@ -16,8 +16,23 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var tfEmail: UITextField!
     @IBOutlet weak var tfPassword: UITextField!
+    @IBOutlet weak var lblEmail: UILabel!
+    @IBOutlet weak var lblPassword: UILabel!
+    @IBOutlet weak var btnForgotPassword: UIButton!
+    @IBOutlet weak var btnLogin: UIButton!
+    @IBOutlet weak var lblSignInSocial: UILabel!
+    @IBOutlet weak var lblRegisterNow: UILabel!
+    @IBOutlet weak var lblDontHaveAccount: UILabel!
+    @IBOutlet weak var lblAnonymousLogin: UILabel!
+    @IBOutlet weak var lblOrSignInVia: UILabel!
+    @IBOutlet weak var lblSignInHeading: UILabel!
     
     var loginAnynomous : Bool?
+    var socialLogin : Bool?
+    var strSocialID = ""
+    var strSocialType = ""
+    var strSocialName = ""
+    var strSocialEmail = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +40,26 @@ class LoginViewController: UIViewController {
         //        GIDSignIn.sharedInstance.clientID = "401365978958-7t197g8ijcseo39ne4oedtknqk9febfa.apps.googleusercontent.com"
         //        GIDSignIn.sharedInstance.delegate = self
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setLanguageText()
+    }
+    
+    func setLanguageText(){
+        self.lblSignInHeading.text = "Sign In".localized()
+        self.lblEmail.text = "Email".localized()
+        self.lblPassword.text = "Password".localized()
+        self.btnLogin.setTitle("Login".localized(), for: .normal)
+        self.btnForgotPassword.setTitle("Forgot Password?".localized(), for: .normal)
+        self.lblSignInSocial.text = "or sign in via social account".localized()
+        self.lblOrSignInVia.text = "or sign in via".localized()
+        self.lblAnonymousLogin.text = "Anonymous Login!".localized()
+        self.lblDontHaveAccount.text = "Don't have an account".localized()
+        self.lblRegisterNow.text = "Register Now!".localized()
+        
     }
     
     
@@ -108,20 +143,37 @@ extension LoginViewController {
         
         var dicrParam = [String:Any]()
         
+        var url = ""
+        
         if loginAnynomous!{
             
             dicrParam = ["device_type":"IOS",
                          "device_id":objAppShareData.uuidString,
-                         "register_id":objAppShareData.strFirebaseToken]as [String:Any]
+                         "ios_register_id":objAppShareData.strFirebaseToken]as [String:Any]
+            url = WsUrl.url_AnonymousLogin
+            
+        }else if socialLogin == true{
+            dicrParam = ["name":self.strSocialName,
+                         "email":self.strSocialEmail,
+                         "social_id":self.strSocialID,
+                         "social_type":self.strSocialType,
+                         "ios_register_id":objAppShareData.strFirebaseToken]as [String:Any]
+            
+            url = WsUrl.url_SocialLogin
+            
         }else{
             dicrParam = ["username":self.tfEmail.text!,
                          "password":self.tfPassword.text!,
                          "ios_register_id":objAppShareData.strFirebaseToken]as [String:Any]
+            
+            url = WsUrl.url_Login
         }
         
+        print(dicrParam)
         
         
-        objWebServiceManager.requestGet(strURL: WsUrl.url_Login, params: dicrParam, queryParams: [:], strCustomValidation: "") { (response) in
+        
+        objWebServiceManager.requestGet(strURL: url, params: dicrParam, queryParams: [:], strCustomValidation: "") { (response) in
             objWebServiceManager.hideIndicator()
             
             let status = (response["status"] as? Int)
@@ -189,14 +241,19 @@ extension LoginViewController :  ASAuthorizationControllerDelegate, ASAuthorizat
             let userIdentifier = appleIDCredential.user
             // You can use userIdentifier to identify the user in your system
             print("User ID: \(userIdentifier)")
-            
+            self.strSocialID = "\(userIdentifier)"
+            self.strSocialType = "apple"
             // You can also access user's full name and email
             if let fullName = appleIDCredential.fullName,
                let email = appleIDCredential.email {
                 print("Full Name: \(fullName.givenName ?? "") \(fullName.familyName ?? "")")
                 print("Email: \(email)")
+               
             }
-            
+            self.strSocialName = appleIDCredential.fullName?.givenName ?? ""
+            self.strSocialEmail = appleIDCredential.email ?? ""
+            self.socialLogin = true
+            self.call_WsLogin()
             // Proceed with your authentication or registration logic here
             // Call your API or navigate to the next screen
         }
@@ -224,9 +281,17 @@ extension LoginViewController {
         // Start the sign in flow!
         
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
+            self.socialLogin = true
             print(error)
-            print(signInResult?.user)
-            print(signInResult?.user.idToken)
+            print(signInResult?.user.profile?.name)
+            print(signInResult?.user.profile?.givenName)
+            print(signInResult?.user.profile?.familyName)
+            print(signInResult?.user.idToken?.tokenString ?? "")
+            self.strSocialID = "\(signInResult?.user.idToken?.tokenString ?? "")"
+            self.strSocialType = "google"
+            self.strSocialName = signInResult?.user.profile?.name ?? ""
+            self.strSocialEmail = signInResult?.user.profile?.email ?? ""
+            self.call_WsLogin()
             // check `error`; do something with `signInResult`
         }
     }

@@ -15,6 +15,8 @@ class GamesViewController: UIViewController {
     @IBOutlet weak var vwJoinedGames: UIView!
     @IBOutlet weak var btnMyGames: UIButton!
     @IBOutlet weak var btnJoinedGames: UIButton!
+    @IBOutlet weak var lblGamesHeading: UILabel!
+    
     
     var arrMyGames = [GetGameModel]()
     
@@ -23,7 +25,6 @@ class GamesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
         // Do any additional setup after loading the view.
         let nib = UINib(nibName: "GamesTableViewCell", bundle: nil)
         self.tblVw.register(nib, forCellReuseIdentifier: "GamesTableViewCell")
@@ -33,11 +34,25 @@ class GamesViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setlanguage()
         self.call_GetMyGame_Api()
         DispatchQueue.main.async {
             self.vwHeader.setCornerRadiusIndiviualCorners(radius: 30.0, corners: [.bottomLeft, .bottomRight])
         }
-        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        resetButtonColors()
+        self.vwMyGames.backgroundColor = UIColor(named: "app_color")
+        self.btnMyGames.setTitleColor(.white, for: .normal)
+        isJoinedGames = false
+    }
+    
+    func setlanguage(){
+        self.lblGamesHeading.text = "Games".localized()
+        self.btnMyGames.setTitle("My Games".localized(), for: .normal)
+        self.btnJoinedGames.setTitle("Joined Games".localized(), for: .normal)
     }
     
     @IBAction func btnOnMyGames(_ sender: Any) {
@@ -157,7 +172,14 @@ extension GamesViewController {
             }else{
                 objWebServiceManager.hideIndicator()
                 if let msgg = response["result"]as? String{
-                    objAlert.showAlert(message: msgg, title: "", controller: self)
+                    self.arrMyGames.removeAll()
+                    self.tblVw.reloadData()
+                    if msgg == "games not Available"{
+                        objAlert.showAlert(message: "No Games Available".localized(), title: "", controller: self)
+                    }else{
+                        objAlert.showAlert(message: msgg, title: "", controller: self)
+                    }
+                   
                 }else{
                     objAlert.showAlert(message: message ?? "", title: "", controller: self)
                 }

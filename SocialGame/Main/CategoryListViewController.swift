@@ -23,7 +23,7 @@ class CategoryListViewController: UIViewController {
         super.viewDidLoad()
 
        
-        self.lblHeaderTitle.text = categoryName
+        self.lblHeaderTitle.text = categoryName.localized()
         
         // Do any additional setup after loading the view.
         let nib = UINib(nibName: "GamesTableViewCell", bundle: nil)
@@ -32,7 +32,6 @@ class CategoryListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         call_GetCategoryList_Api(strCategoryID: self.categoryId)
         
         DispatchQueue.main.async {
@@ -150,7 +149,11 @@ extension CategoryListViewController {
             }else{
                 objWebServiceManager.hideIndicator()
                 if let msgg = response["result"]as? String{
-                    objAlert.showAlert(message: msgg, title: "", controller: self)
+                    if msgg == "games not Available"{
+                        objAlert.showAlert(message: "No Games Available".localized(), title: "", controller: self)
+                    }else{
+                        objAlert.showAlert(message: msgg, title: "", controller: self)
+                    }
                 }else{
                     objAlert.showAlert(message: message ?? "", title: "", controller: self)
                 }

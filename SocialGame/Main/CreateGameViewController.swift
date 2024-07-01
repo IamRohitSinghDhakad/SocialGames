@@ -16,6 +16,13 @@ class CreateGameViewController: UIViewController, LocationServiceDelegate {
     @IBOutlet weak var tfdate: UITextField!
     @IBOutlet weak var tfLocation: UITextField!
     @IBOutlet weak var tfNumberPlayers: UITextField!
+    @IBOutlet weak var lblCreateGameHeading: UILabel!
+    @IBOutlet weak var lblSelectGame: UILabel!
+    @IBOutlet weak var lblTime: UILabel!
+    @IBOutlet weak var lblDate: UILabel!
+    @IBOutlet weak var lblLocation: UILabel!
+    @IBOutlet weak var lblNumberOfPlayers: UILabel!
+    @IBOutlet weak var btnOnCreate: UIButton!
     
     var arrCategory = [String]()
     var arrcategoryID = [String]()
@@ -35,7 +42,7 @@ class CreateGameViewController: UIViewController, LocationServiceDelegate {
     
     var location: Location? {
         didSet {
-            self.tfLocation.text = location.flatMap({ $0.title }) ?? "No location selected"
+            self.tfLocation.text = location.flatMap({ $0.title }) ?? "Select Location".localized()
             let cordinates = location.flatMap({ $0.coordinate })
             if (cordinates != nil){
                 
@@ -112,6 +119,7 @@ class CreateGameViewController: UIViewController, LocationServiceDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setLanguage()
         DispatchQueue.main.async {
             self.vwHeader.setCornerRadiusIndiviualCorners(radius: 30.0, corners: [.bottomLeft, .bottomRight])
         }
@@ -122,6 +130,18 @@ class CreateGameViewController: UIViewController, LocationServiceDelegate {
             LocationService.shared.showAlertOfLocationNotEnabled()
         }
     }
+    
+    func setLanguage(){
+        self.lblCreateGameHeading.text = "Create Game".localized()
+        self.lblDate.text = "Date".localized()
+        self.lblTime.text = "Time".localized()
+        self.lblLocation.text = "Location".localized()
+        self.lblSelectGame.text = "Select Game".localized()
+        self.lblNumberOfPlayers.text = "Number of Players".localized()
+        self.btnOnCreate.setTitle("Create".localized(), for: .normal)
+    }
+    
+   
     
     func tracingLocation(currentLocation: [String : Any]) {
         
@@ -175,9 +195,9 @@ class CreateGameViewController: UIViewController, LocationServiceDelegate {
         //ToolBar
         let toolbar = UIToolbar();
         toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneDatePicker));
+        let doneButton = UIBarButtonItem(title: "Done".localized(), style: .plain, target: self, action: #selector(doneDatePicker));
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker));
+        let cancelButton = UIBarButtonItem(title: "Cancel".localized(), style: .plain, target: self, action: #selector(cancelDatePicker));
         
         toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
         
@@ -194,9 +214,9 @@ class CreateGameViewController: UIViewController, LocationServiceDelegate {
         //ToolBar
         let toolbar = UIToolbar();
         toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneTimePicker));
+        let doneButton = UIBarButtonItem(title: "Done".localized(), style: .plain, target: self, action: #selector(doneTimePicker));
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker));
+        let cancelButton = UIBarButtonItem(title: "Cancel".localized(), style: .plain, target: self, action: #selector(cancelDatePicker));
         
         toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
         
@@ -231,32 +251,32 @@ class CreateGameViewController: UIViewController, LocationServiceDelegate {
         
         guard let selectGame = tfSelectGame.text, !selectGame.isEmpty else {
             // Show an error message for empty email
-            objAlert.showAlert(message: "Please Select Game".localized(), controller: self)
+            objAlert.showAlert(message: "Select Game".localized(), controller: self)
             return false
         }
         
         guard let time = tfTime.text, !time.isEmpty else {
             // Show an error message for empty email
-            objAlert.showAlert(message: "Please Enter Time".localized(), controller: self)
+            objAlert.showAlert(message: "Select Time".localized(), controller: self)
             return false
         }
         
         guard let date = tfdate.text, !date.isEmpty else {
             // Show an error message for empty email
-            objAlert.showAlert(message: "Please Enter Date".localized(), controller: self)
+            objAlert.showAlert(message: "Select Date".localized(), controller: self)
             return false
         }
         
         
         guard let location = tfLocation.text, !location.isEmpty else {
             // Show an error message for empty email
-            objAlert.showAlert(message: "Please Enter Location".localized(), controller: self)
+            objAlert.showAlert(message: "Select Location".localized(), controller: self)
             return false
         }
         
         guard let numberPlayers = tfNumberPlayers.text, !numberPlayers.isEmpty else {
             // Show an error message for empty email
-            objAlert.showAlert(message: "Please Enter no of players".localized(), controller: self)
+            objAlert.showAlert(message: "PEnter Number of players required".localized(), controller: self)
             return false
         }
         // All validations pass
@@ -290,7 +310,7 @@ extension CreateGameViewController {
                     for data in user_details{
                         let obj = CategoryModel.init(from: data)
                         let catName = obj.category_name
-                        self.arrCategory.append(catName ?? "")
+                        self.arrCategory.append(catName?.localized() ?? "")
                         self.arrcategoryID.append(obj.category_id ?? "")
                         print(obj.category_id!)
                     }
@@ -355,7 +375,7 @@ extension CreateGameViewController {
             if status == MessageConstant.k_StatusCode{
                 if let user_details  = response["result"] as? [String:Any] {
                     
-                    objAlert.showAlertSingleButtonCallBack(alertBtn: "OK", title: "", message: "Your Game Creation Requested succesfully", controller: self) {
+                    objAlert.showAlertSingleButtonCallBack(alertBtn: "OK", title: "", message: "Game Added Successfully".localized(), controller: self) {
                         
                         if let tabBarController = self.tabBarController {
                             tabBarController.selectedIndex = 1

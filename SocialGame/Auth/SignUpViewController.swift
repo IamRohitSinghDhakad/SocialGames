@@ -16,7 +16,21 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var tfPassword: UITextField!
     @IBOutlet weak var imgVwMale: UIImageView!
     @IBOutlet weak var imgVwFemale: UIImageView!
+    @IBOutlet weak var lblSignUp: UILabel!
     @IBOutlet weak var imgVwOther: UIImageView!
+    @IBOutlet weak var lblFullName: UILabel!
+    @IBOutlet weak var lblEmail: UILabel!
+    @IBOutlet weak var lblMobileNumber: UILabel!
+    @IBOutlet weak var lblDateOfBirth: UILabel!
+    @IBOutlet weak var lblPassword: UILabel!
+    @IBOutlet weak var lblGender: UILabel!
+    @IBOutlet weak var lblMale: UILabel!
+    @IBOutlet weak var lblFemale: UILabel!
+    @IBOutlet weak var lblOther: UILabel!
+    @IBOutlet weak var btnRegister: UIButton!
+    @IBOutlet weak var lblAlreadyHaveaAccount: UILabel!
+    @IBOutlet weak var lblLoginNow: UILabel!
+    
     
     var strSelectGender = ""
     let datePicker = UIDatePicker()
@@ -26,6 +40,33 @@ class SignUpViewController: UIViewController {
         self.tfDateOfBirth.delegate = self
         self.setDatePicker()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setLanguageText()
+    }
+    
+    func setLanguageText(){
+        self.lblSignUp.text = "Sign Up".localized()
+        self.lblFullName.text = "Full Name".localized()
+        self.lblEmail.text = "Email".localized()
+        self.btnRegister.setTitle("Register".localized(), for: .normal)
+        self.lblMobileNumber.text = "Mobile Number".localized()
+        self.lblDateOfBirth.text = "Date of Birth (Optional)".localized()
+        self.lblPassword.text = "Password".localized()
+        self.lblGender.text = "Gender (Optional)".localized()
+        self.lblMale.text = "Male".localized()
+        self.lblFemale.text = "Female".localized()
+        self.lblOther.text = "Other".localized()
+        
+        self.lblAlreadyHaveaAccount.text = "Already have an account".localized()
+        self.lblLoginNow.text = "Login!".localized()
+        
+        
+        
+        
     }
 
     @IBAction func btnOnRegister(_ sender: Any) {
@@ -80,9 +121,9 @@ class SignUpViewController: UIViewController {
         //ToolBar
         let toolbar = UIToolbar();
         toolbar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneDatePicker));
+        let doneButton = UIBarButtonItem(title: "Done".localized(), style: .plain, target: self, action: #selector(doneDatePicker));
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker));
+        let cancelButton = UIBarButtonItem(title: "Cancel".localized(), style: .plain, target: self, action: #selector(cancelDatePicker));
         
         toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
         
@@ -106,7 +147,7 @@ class SignUpViewController: UIViewController {
         
         guard let fullName = tfFullName.text, !fullName.isEmpty else {
             // Show an error message for empty email
-            objAlert.showAlert(message: "Please Enter Full Name".localized(), controller: self)
+            objAlert.showAlert(message: "Please Enter Name".localized(), controller: self)
             return false
         }
         
@@ -120,7 +161,7 @@ class SignUpViewController: UIViewController {
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         guard emailPred.evaluate(with: email) else {
             // Show an error message for invalid email format
-            objAlert.showAlert(message: "Email is not valid".localized(), controller: self)
+            objAlert.showAlert(message: "Please Enter Vailid Email".localized(), controller: self)
             return false
         }
         
@@ -130,11 +171,11 @@ class SignUpViewController: UIViewController {
             return false
         }
         
-        guard let dob = tfDateOfBirth.text, !dob.isEmpty else {
-            // Show an error message for empty email
-            objAlert.showAlert(message: "Please Select Date of Birth".localized(), controller: self)
-            return false
-        }
+//        guard let dob = tfDateOfBirth.text, !dob.isEmpty else {
+//            // Show an error message for empty email
+//            objAlert.showAlert(message: "Please Select Date of Birth".localized(), controller: self)
+//            return false
+//        }
         
         guard let password = tfPassword.text, !password.isEmpty else {
             // Show an error message for empty password
@@ -142,11 +183,11 @@ class SignUpViewController: UIViewController {
             return false
         }
         
-        guard !self.strSelectGender.isEmpty else {
-            // Show an error message for empty gender
-            objAlert.showAlert(message: "Please select Gender".localized(), controller: self)
-            return false
-        }
+//        guard !self.strSelectGender.isEmpty else {
+//            // Show an error message for empty gender
+//            objAlert.showAlert(message: "Please select Gender".localized(), controller: self)
+//            return false
+//        }
 
         // All validations pass
         return true
@@ -169,7 +210,7 @@ extension SignUpViewController {
 
         
         var dicrParam = [String:Any]()
-            dicrParam = ["name":self.tfEmail.text!,
+            dicrParam = ["name":self.tfFullName.text!,
                          "email":self.tfEmail.text!,
                          "mobile":self.tfMobileNumber.text!,
                          "dob":self.tfDateOfBirth.text!,
@@ -179,7 +220,7 @@ extension SignUpViewController {
         
         
         
-        objWebServiceManager.requestGet(strURL: WsUrl.url_Login, params: dicrParam, queryParams: [:], strCustomValidation: "") { (response) in
+        objWebServiceManager.requestGet(strURL: WsUrl.url_SignUp, params: dicrParam, queryParams: [:], strCustomValidation: "") { (response) in
             objWebServiceManager.hideIndicator()
             
             let status = (response["status"] as? Int)

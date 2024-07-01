@@ -26,6 +26,10 @@ class GamesTableViewCell: UITableViewCell {
         // Initialization code
         
         self.vwOuter.viewShadowHeader()
+        
+        self.lblDateHeading.text = "Date".localized() + " -"
+        self.lblTimeHeading.text = "Time".localized() + " -"
+        self.lblLocationHeading.text = "Location".localized() + " -"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -18,6 +18,10 @@ class GameDetailViewController: UIViewController {
     @IBOutlet weak var imgVwGameImage: UIImageView!
     @IBOutlet weak var cvPlayers: UICollectionView!
     @IBOutlet weak var btnRequestJoine: UIButton!
+    @IBOutlet weak var lblHeading: UILabel!
+    @IBOutlet weak var lblDateHeading: UILabel!
+    @IBOutlet weak var lblTimeHeading: UILabel!
+    @IBOutlet weak var lblLocationHeading: UILabel!
     
     var arrMyGamesPlayers = [GamePlayersModel]()
     var objGameData : GetGameModel?
@@ -57,6 +61,19 @@ class GameDetailViewController: UIViewController {
             self.imgVwGameImage.image = #imageLiteral(resourceName: "user 1")
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setLanguage()
+    }
+    
+    func setLanguage(){
+        self.lblHeading.text = "Game Detail".localized()
+        self.lblDate.text = "Date -".localized()
+        self.lblTime.text = "Time -".localized()
+        self.lblLocation.text = "Location -".localized()
+        self.btnRequestJoine.setTitle("Request For Join".localized(), for: .normal)
     }
     
     @IBAction func btnOnBack(_ sender: Any) {
@@ -233,7 +250,7 @@ extension GameDetailViewController {
             if status == MessageConstant.k_StatusCode{
                 if let user_details  = response["result"] as? [String:Any] {
                 
-                    objAlert.showAlertSingleButtonCallBack(alertBtn: "OK", title: "", message: "Request Sent Succesfully", controller: self) {
+                    objAlert.showAlertSingleButtonCallBack(alertBtn: "OK".localized(), title: "", message: "Join Request Sent Successfully".localized(), controller: self) {
                         self.onBackPressed()
                     }
                     

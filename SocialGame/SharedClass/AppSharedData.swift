@@ -38,6 +38,15 @@ class AppSharedData: NSObject {
     var userType = ""
     var uuidString = ""
     
+    var currentLanguage: String {
+        get {
+            return LocalizationSystem.sharedInstance.getLanguage()
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "currentLanguage")
+        }
+    }
+    
     open var isLoggedIn: Bool {
         get {
             if (UserDefaults.standard.value(forKey:  UserDefaults.KeysDefault.userInfo) as? [String : Any]) != nil {

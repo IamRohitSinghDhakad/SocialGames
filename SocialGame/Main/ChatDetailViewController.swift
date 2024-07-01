@@ -8,13 +8,17 @@
 import UIKit
 
 class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var vwHeader: UIView!
     @IBOutlet weak var lblUserame: UILabel!
     @IBOutlet weak var tblChatList: UITableView!
     @IBOutlet var txtVwChat: RDTextView!
     @IBOutlet var hgtConsMaximum: NSLayoutConstraint!
     @IBOutlet var hgtConsMinimum: NSLayoutConstraint!
+    @IBOutlet weak var vwBlocked: UIView!
+    @IBOutlet weak var lblBlockMessage: UILabel!
+    
+    
     
     let txtViewCommentMaxHeight: CGFloat = 100
     let txtViewCommentMinHeight: CGFloat = 34
@@ -22,7 +26,7 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     var strSenderId = ""
     var strProductId = ""
     var strUsername = ""
-    
+    var isBlocked = ""
     var timer: Timer?
     var arrCount = Int()
     var initilizeFirstTimeOnly = Bool()
@@ -34,7 +38,7 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.vwBlocked.isHidden = true
         self.lblUserame.text = self.strUsername
         tblChatList.delegate = self
         tblChatList.dataSource = self
@@ -44,6 +48,12 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
             self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
         }else{
             
+        }
+        print(isBlocked)
+        if self.isBlocked == "1"{
+            self.vwBlocked.isHidden = false
+        }else{
+            self.vwBlocked.isHidden = true
         }
         
     }
@@ -72,6 +82,107 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         return 1
     }
     
+    
+    @IBAction func btnOnBlockUser(_ sender: Any) {
+        
+        // Create the action sheet
+        let actionSheet = UIAlertController(title: "Choose Action".localized(), message: "What would you like to do?".localized(), preferredStyle: .actionSheet)
+
+        // Add the "Report" action
+        let reportAction = UIAlertAction(title: "Report".localized(), style: .destructive) { action in
+            // Handle the report action here
+            print("User chose to report")
+            // You can navigate to the report screen or show another dialog here
+            self.call_ReportUser_Api(userID: self.strSenderId)
+        }
+        actionSheet.addAction(reportAction)
+
+        // Add the "Block" or "Unblock" action based on the isBlocked status
+        if self.isBlocked == "1" {
+            let unblockAction = UIAlertAction(title: "Unblock".localized(), style: .destructive) { action in
+                // Handle the unblock action here
+                print("User chose to unblock")
+                // You can handle the unblocking logic here
+                self.call_BlockUser_Api(userID: self.strSenderId)
+                // self.vwBlocked.isHidden = true
+                // self.lblBlockMessage.text = "User Unblocked".localized()
+            }
+            actionSheet.addAction(unblockAction)
+        } else {
+            let blockAction = UIAlertAction(title: "Block".localized(), style: .destructive) { action in
+                // Handle the block action here
+                print("User chose to block")
+                // You can handle the blocking logic here
+                self.call_BlockUser_Api(userID: self.strSenderId)
+                // self.vwBlocked.isHidden = false
+                // self.lblBlockMessage.text = "User Blocked".localized()
+            }
+            actionSheet.addAction(blockAction)
+        }
+
+        // Add the "Cancel" action
+        let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel) { action in
+            // Handle the cancel action here
+            print("User canceled the action")
+        }
+        actionSheet.addAction(cancelAction)
+
+        // Present the action sheet
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.sourceView = self.view // to set the source of your alert if it is a popover
+            popoverController.sourceRect = (sender as AnyObject).bounds // you can set the position of the popover here
+        }
+
+        self.present(actionSheet, animated: true, completion: nil)
+
+        
+        
+//        // Create the action sheet
+//        let actionSheet = UIAlertController(title: "Choose Action".localized(), message: "What would you like to do?".localized(), preferredStyle: .actionSheet)
+//        
+//        // Add the "Report" action
+//        let reportAction = UIAlertAction(title: "Report".localized(), style: .destructive) { action in
+//            // Handle the report action here
+//            print("User chose to report")
+//            // You can navigate to the report screen or show another dialog here
+//            self.call_ReportUser_Api(userID: self.strSenderId)
+//        }
+//        
+//        // Add the "Block" action
+//        if self.isBlocked == "1"{
+//            
+//        }else{
+//            
+//        }
+//        let blockAction = UIAlertAction(title: "Block".localized(), style: .destructive) { action in
+//            // Handle the block action here
+//            print("User chose to block")
+//            // You can handle the blocking logic here
+//            self.call_BlockUser_Api(userID: self.strSenderId)
+////            self.vwBlocked.isHidden = false
+////            self.lblBlockMessage.text = "User Blocked".localized()
+//        }
+//        
+//        // Add the "Cancel" action
+//        let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel) { action in
+//            // Handle the cancel action here
+//            print("User canceled the action")
+//        }
+//        
+//        // Add the actions to the action sheet
+//        actionSheet.addAction(reportAction)
+//        actionSheet.addAction(blockAction)
+//        actionSheet.addAction(cancelAction)
+//        
+//        // Present the action sheet
+//        if let popoverController = actionSheet.popoverPresentationController {
+//            popoverController.sourceView = self.view // to set the source of your alert if it is a popover
+//            popoverController.sourceRect = (sender as AnyObject).bounds // you can set the position of the popover here
+//        }
+//        
+//        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.arrChatMsg.count
     }
@@ -81,6 +192,9 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         
         
         let obj = self.arrChatMsg[indexPath.row]
+        
+        
+    
         
         if obj.strSenderId == self.strReceiverId{
             cell.vwMyMsg.isHidden = false
@@ -102,7 +216,7 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         return cell
     }
     
-   
+    
     
     @IBAction func btnSendMessage(_ sender: Any) {
         if (txtVwChat.text?.isEmpty)!{
@@ -188,7 +302,7 @@ extension ChatDetailViewController: UITextViewDelegate{
             objAlert.showAlert(message: "Please enter some text", controller: self)
             return
         }else{
-          
+            
             self.call_SendTextMessageOnly(strText: self.txtVwChat.text!)
         }
         self.txtVwChat.text = ""
@@ -222,8 +336,8 @@ extension ChatDetailViewController{
         
         // objWebServiceManager.showIndicator()
         
-//        let receiverId = dictPrevious.GetString(forKey: "receiver_id")
-//        let senderId = dictPrevious.GetString(forKey: "sender_id")
+        //        let receiverId = dictPrevious.GetString(forKey: "receiver_id")
+        //        let senderId = dictPrevious.GetString(forKey: "sender_id")
         
         let dict = ["receiver_id":self.strReceiverId,
                     "sender_id":self.strSenderId,
@@ -262,6 +376,7 @@ extension ChatDetailViewController{
                         let obj = ChatDetailModel.init(dict: dict)
                         newArrayChatMessages.append(obj)
                     }
+                    
                     
                     if self.arrChatMsg.count == 0 {
                         //Add initially all
@@ -320,16 +435,11 @@ extension ChatDetailViewController{
                     }else{
                         self.updateTableContentInset()
                     }
-                    
-                    
                     if self.arrChatMsg.count == 0{
                         self.tblChatList.displayBackgroundText(text: "No Message Found!")
                     }else{
                         self.tblChatList.displayBackgroundText(text: "")
                     }
-                    
-                    
-                    
                 }
                 else {
                     objAlert.showAlert(message: "Something went wrong!", title: "", controller: self)
@@ -337,9 +447,9 @@ extension ChatDetailViewController{
             }else{
                 objWebServiceManager.hideIndicator()
                 if let msgg = response["result"]as? String{
-                    objAlert.showAlert(message: msgg, title: "", controller: self)
+                    // objAlert.showAlert(message: msgg, title: "", controller: self)
                 }else{
-                    objAlert.showAlert(message: message ?? "", title: "", controller: self)
+                    // objAlert.showAlert(message: message ?? "", title: "", controller: self)
                 }
             }
         } failure: { (Error) in
@@ -380,6 +490,8 @@ extension ChatDetailViewController{
                     // self.isSendMessage = true
                     self.initilizeFirstTimeOnly = false
                     // self.call_GetChatList(strUserID: objAppShareData.UserDetail.strUserId, strSenderID: self.strSenderID)
+                }else{
+                    objAlert.showAlert(message: "This user blocked you".localized(), controller: self)
                 }
             }else{
                 objWebServiceManager.hideIndicator()
@@ -434,5 +546,129 @@ extension UITableView {
     
     func hasRowAtIndexPath(indexPath: IndexPath) -> Bool {
         return indexPath.section < self.numberOfSections && indexPath.row < self.numberOfRows(inSection: indexPath.section)
+    }
+}
+
+
+//Block user and Report User API
+
+extension ChatDetailViewController{
+    
+    
+    func call_ReportUser_Api(userID: String){
+        
+        if !objWebServiceManager.isNetworkAvailable(){
+            objWebServiceManager.hideIndicator()
+            objAlert.showAlert(message: "No Internet Connection", title: "Alert", controller: self)
+            return
+        }
+        
+        objWebServiceManager.showIndicator()
+        
+        let dicrParam = ["user_id":userID,
+                         "reported_by":objAppShareData.UserDetail.strUserId!]as [String:Any]
+        
+        objWebServiceManager.requestGet(strURL: WsUrl.url_ReportUser, params: dicrParam, queryParams: [:], strCustomValidation: "") { (response) in
+            objWebServiceManager.hideIndicator()
+            
+            let status = (response["status"] as? Int)
+            let message = (response["message"] as? String)
+            print(response)
+            
+            if status == MessageConstant.k_StatusCode{
+                if response["result"] is [[String:Any]] {
+                    
+                    let confirmationDialog = UIAlertController(title: "Report Submitted".localized(), message: "Thank you for helping us keep our community safe.".localized() + "\n" + "Your report has been submitted successfully. We take objectionable content very seriously and will review this report within 24 hours. If the content is found to violate our community guidelines, appropriate actions will be taken, including removing the content and ejecting the user who provided it.".localized() + "\n" + "Your vigilance helps us maintain a respectful and enjoyable environment for everyone.".localized(), preferredStyle: .alert)
+                    
+                    let okAction = UIAlertAction(title: "OK".localized(), style: .default) { _ in
+                        // Navigate to the previous page
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    
+                    confirmationDialog.addAction(okAction)
+                    self.present(confirmationDialog, animated: true, completion: nil)
+                    
+                    
+                }
+                else {
+                    objAlert.showAlert(message: "Something went wrong!", title: "", controller: self)
+                }
+            }else{
+                objWebServiceManager.hideIndicator()
+                if let msgg = response["result"]as? String{
+                    objAlert.showAlert(message: msgg, title: "", controller: self)
+                }else{
+                    objAlert.showAlert(message: message ?? "", title: "", controller: self)
+                }
+            }
+            
+            
+        } failure: { (Error) in
+            //  print(Error)
+            objWebServiceManager.hideIndicator()
+        }
+    }
+    
+    
+    func call_BlockUser_Api(userID: String){
+        
+        if !objWebServiceManager.isNetworkAvailable(){
+            objWebServiceManager.hideIndicator()
+            objAlert.showAlert(message: "No Internet Connection", title: "Alert", controller: self)
+            return
+        }
+        
+        objWebServiceManager.showIndicator()
+        
+        let dicrParam = ["user_id":userID,
+                         "blocked_by":objAppShareData.UserDetail.strUserId!]as [String:Any]
+        
+        objWebServiceManager.requestGet(strURL: WsUrl.url_BlockUser, params: dicrParam, queryParams: [:], strCustomValidation: "") { (response) in
+            objWebServiceManager.hideIndicator()
+            
+            let status = (response["status"] as? Int)
+            let message = (response["message"] as? String)
+            print(response)
+            
+            if status == MessageConstant.k_StatusCode{
+                if let user_details  = response["result"] as? [String:Any] {
+                    
+                    let confirmationDialog = UIAlertController(title: "User Blocked".localized(), message: "".localized(), preferredStyle: .alert)
+                    
+                    let okAction = UIAlertAction(title: "OK".localized(), style: .default) { _ in
+                        // Navigate to the previous page
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    
+                    confirmationDialog.addAction(okAction)
+                    self.present(confirmationDialog, animated: true, completion: nil)
+                    
+                    
+                }
+                else {
+                    let confirmationDialog = UIAlertController(title: "User Unblocked".localized(), message: "".localized(), preferredStyle: .alert)
+                    
+                    let okAction = UIAlertAction(title: "OK".localized(), style: .default) { _ in
+                        // Navigate to the previous page
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                    
+                    confirmationDialog.addAction(okAction)
+                    self.present(confirmationDialog, animated: true, completion: nil)
+                }
+            }else{
+                objWebServiceManager.hideIndicator()
+                if let msgg = response["result"]as? String{
+                    objAlert.showAlert(message: msgg, title: "", controller: self)
+                }else{
+                    objAlert.showAlert(message: message ?? "", title: "", controller: self)
+                }
+            }
+            
+            
+        } failure: { (Error) in
+            //  print(Error)
+            objWebServiceManager.hideIndicator()
+        }
     }
 }

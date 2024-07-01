@@ -17,6 +17,7 @@ class ChatDetailModel:NSObject {
     var strSenderId : String = ""
     var strChatTime   : String = ""
     var strType   : String = ""
+ 
     
     
     init(dict : [String:Any]) {
@@ -52,8 +53,7 @@ class ChatDetailModel:NSObject {
             self.strType = type
         }
         
-        
-        
+    
         if let chat_message = dict["chat_message"] as? String{
             self.strOpponentChatMessage = chat_message.decodeEmoji
         }

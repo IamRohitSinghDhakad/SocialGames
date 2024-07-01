@@ -16,6 +16,11 @@ class MyGamesViewController: UIViewController {
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var lblLocation: UILabel!
     @IBOutlet weak var tblVw: UITableView!
+    @IBOutlet weak var lblHeader: UILabel!
+    @IBOutlet weak var lblDateHeading: UILabel!
+    @IBOutlet weak var lblTimeHeading: UILabel!
+    @IBOutlet weak var lblLocationHeading: UILabel!
+    @IBOutlet weak var lblAllReq: UILabel!
     
     var arrMyGamesPlayers = [GamePlayersModel]()
     var objGameData : GetGameModel?
@@ -36,8 +41,19 @@ class MyGamesViewController: UIViewController {
         self.lblDate.text = objGameData?.date
         self.lblTime.text = objGameData?.time
         self.lblLocation.text = objGameData?.location
-        self.lblHeaderTitle.text = objGameData?.category_name
+        self.lblHeaderTitle.text = objGameData?.category_name?.localized()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.lblDateHeading.text = "Date -".localized()
+        self.lblTimeHeading.text = "Time -".localized()
+        self.lblLocationHeading.text = "Location -".localized()
+        self.lblAllReq.text = "All Requests".localized()
+    }
+    
+    
     
 
     @IBAction func btnOnBack(_ sender: Any) {
@@ -67,12 +83,12 @@ extension MyGamesViewController : UITableViewDelegate, UITableViewDataSource{
         cell.lblUserName.text = obj.creator_name
         
         if obj.approved == "1"{
-            cell.btnAccept.setTitle("Accepted", for: .normal)
+            cell.btnAccept.setTitle("Accepted".localized(), for: .normal)
             cell.btnAccept.backgroundColor = UIColor(named: "app_color")
             cell.btnAccept.setTitleColor(.white, for: .normal)
             cell.btnAccept.cornerRadius = 8
         }else{
-            cell.btnAccept.setTitle("Accept", for: .normal)
+            cell.btnAccept.setTitle("Accept".localized(), for: .normal)
             cell.btnAccept.backgroundColor = .clear
             cell.btnAccept.setTitleColor(.black, for: .normal)
             cell.btnAccept.cornerRadius = 0
@@ -94,8 +110,13 @@ extension MyGamesViewController : UITableViewDelegate, UITableViewDataSource{
     
     @objc func btnChatAction(sender: UIButton){
         let buttonTag = sender.tag
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatDetailViewController")as! ChatDetailViewController
+        vc.strReceiverId = objAppShareData.UserDetail.strUserId ?? ""
+        vc.strSenderId = self.arrMyGamesPlayers[buttonTag].user_id ?? ""
+        vc.strProductId = self.arrMyGamesPlayers[buttonTag].game_id ?? ""
+        vc.strUsername = self.arrMyGamesPlayers[buttonTag].creator_name ?? ""
+        self.navigationController?.pushViewController(vc, animated: true)
         
-        print(buttonTag)
     }
     
     
@@ -150,7 +171,7 @@ extension MyGamesViewController{
                 objWebServiceManager.hideIndicator()
                 if let msgg = response["result"]as? String{
                     
-                    self.tblVw.displayBackgroundText(text: msgg)
+                    self.tblVw.displayBackgroundText(text: "No Requests Comes Yet".localized())
                     self.tblVw.reloadData()
                    // objAlert.showAlert(message: msgg, title: "", controller: self)
                 }else{

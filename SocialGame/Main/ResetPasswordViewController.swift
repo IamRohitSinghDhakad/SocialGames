@@ -13,6 +13,12 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet weak var tfNewPasswword: UITextField!
     @IBOutlet weak var tfConfirmPassword: UITextField!
     @IBOutlet weak var vwHeader: UIView!
+    @IBOutlet weak var lblHeader: UILabel!
+    @IBOutlet weak var lblOldPassword: UILabel!
+    @IBOutlet weak var lblNewPassword: UILabel!
+    @IBOutlet weak var lblConfirmPassword: UILabel!
+    @IBOutlet weak var btnUpdate: UIButton!
+    
     
     var strOldPassword = ""
     
@@ -24,10 +30,20 @@ class ResetPasswordViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setlanguage()
         DispatchQueue.main.async {
             self.vwHeader.setCornerRadiusIndiviualCorners(radius: 30.0, corners: [.bottomLeft, .bottomRight])
         }
     }
+    
+    func setlanguage(){
+        self.lblHeader.text = "Reset Password".localized()
+        self.lblOldPassword.text = "Old Password".localized()
+        self.lblNewPassword.text = "New Password".localized()
+        self.lblConfirmPassword.text = "Confirm Password".localized()
+        self.btnUpdate.setTitle("Update".localized(), for: .normal)
+    }
+    
     
     @IBAction func btnOnOldPassword(_ sender: Any) {
         self.tfOldPassword.isSecureTextEntry = self.tfOldPassword.isSecureTextEntry == true ? false : true
@@ -66,7 +82,7 @@ class ResetPasswordViewController: UIViewController {
             if newPassword == confirmPassword {
                 return true
             } else {
-                objAlert.showAlert(message: "New Password and Confirm Password do not match.".localized(), controller: self)
+                objAlert.showAlert(message: "Enter valid password".localized(), controller: self)
                 return false
             }
 //        }
@@ -108,7 +124,7 @@ extension ResetPasswordViewController {
             if status == MessageConstant.k_StatusCode{
                 if let user_details  = response["result"] as? [String:Any] {
                     
-                    objAlert.showAlertSingleButtonCallBack(alertBtn: "OK", title: "", message: "Your password has been changed", controller: self) {
+                    objAlert.showAlertSingleButtonCallBack(alertBtn: "OK".localized(), title: "", message: "Password reset successfully".localized(), controller: self) {
                         self.onBackPressed()
                     }
                     

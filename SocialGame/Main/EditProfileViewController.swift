@@ -15,6 +15,16 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var tfEmail: UITextField!
     @IBOutlet weak var tfmobileNumber: UITextField!
     @IBOutlet weak var tfDOB: UITextField!
+    @IBOutlet weak var lblUpdateProfilePicture: UILabel!
+    
+    @IBOutlet weak var lblFullName: UILabel!
+    @IBOutlet weak var lblEmail: UILabel!
+    @IBOutlet weak var lblMobileNumber: UILabel!
+    @IBOutlet weak var lblDateOfBirth: UILabel!
+    @IBOutlet weak var btnUpdate: UIButton!
+    @IBOutlet weak var lblHeaderEditProfile: UILabel!
+    
+    
     
     var objUser : UserModel?
     let datePicker = UIDatePicker()
@@ -45,9 +55,20 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setlanguage()
         DispatchQueue.main.async {
             self.vwHeader.setCornerRadiusIndiviualCorners(radius: 30.0, corners: [.bottomLeft, .bottomRight])
         }
+    }
+    
+    func setlanguage(){
+        self.lblHeaderEditProfile.text = "Edit Profile".localized()
+        self.lblFullName.text = "Full Name".localized()
+        self.lblEmail.text = "Email".localized()
+        self.lblMobileNumber.text = "Mobile Number".localized()
+        self.lblDateOfBirth.text = "Date of Birth".localized()
+        self.btnUpdate.setTitle("Update".localized(), for: .normal)
+        self.lblUpdateProfilePicture.text = "Update Profile Image".localized()
     }
     
     @IBAction func btnOnBack(_ sender: Any) {
@@ -240,7 +261,7 @@ extension EditProfileViewController {
         let dicrParam = [
             "user_id":objAppShareData.UserDetail.strUserId ?? "",
             "name":self.tfFullName.text!,
-            "email":self.tfEmail.text!,
+           // "email":self.tfEmail.text!,
             "mobile":self.tfmobileNumber.text!,
             "dob":self.tfDOB.text!]as [String:Any]
         
@@ -254,6 +275,7 @@ extension EditProfileViewController {
             
             if status == MessageConstant.k_StatusCode{
                 
+                
                 guard let user_details  = response["result"] as? [String:Any] else{
                     return
                 }
@@ -265,7 +287,7 @@ extension EditProfileViewController {
                 
             }else{
                 objWebServiceManager.hideIndicator()
-                objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
+                objAlert.showAlert(message: response["result"] as? String ?? "", title: "Alert", controller: self)
             }
         } failure: { (Error) in
             print(Error)

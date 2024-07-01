@@ -12,6 +12,8 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var vwHeader: UIView!
     @IBOutlet weak var cvCategories: UICollectionView!
+    @IBOutlet weak var lblHome: UILabel!
+    @IBOutlet weak var lblCategories: UILabel!
     
     var arrCategory = [CategoryModel]()
     
@@ -25,9 +27,17 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setlanguage()
         DispatchQueue.main.async {
             self.vwHeader.setCornerRadiusIndiviualCorners(radius: 30.0, corners: [.bottomLeft, .bottomRight])
         }
+    }
+    
+    func setlanguage(){
+        
+        self.lblHome.text = "Home".localized()
+        self.lblCategories.text = "Categories".localized()
+        
     }
     
 }

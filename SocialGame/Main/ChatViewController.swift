@@ -11,6 +11,7 @@ class ChatViewController: UIViewController {
 
     @IBOutlet weak var vwHeader: UIView!
     @IBOutlet weak var tblVw: UITableView!
+    @IBOutlet weak var lblChatHeading: UILabel!
     
     
     var arrUserList = [StoreModel]()
@@ -28,6 +29,7 @@ class ChatViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.lblChatHeading.text = "Chat".localized()
         self.call_GetUserList_Api()
         DispatchQueue.main.async {
             self.vwHeader.setCornerRadiusIndiviualCorners(radius: 30.0, corners: [.bottomLeft, .bottomRight])
@@ -65,6 +67,7 @@ extension ChatViewController : UITableViewDataSource, UITableViewDelegate {
         vc.strSenderId = self.arrUserList[indexPath.row].sender_id ?? ""
         vc.strProductId = self.arrUserList[indexPath.row].product_id ?? ""
         vc.strUsername = self.arrUserList[indexPath.row].sender_name ?? ""
+        vc.isBlocked = self.arrUserList[indexPath.row].strBlocked
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -109,7 +112,9 @@ extension ChatViewController{
             }else{
                 objWebServiceManager.hideIndicator()
                 if let msgg = response["result"]as? String{
-                    objAlert.showAlert(message: msgg, title: "", controller: self)
+                    self.arrUserList.removeAll()
+                    self.tblVw.reloadData()
+                    objAlert.showAlert(message: "Chat Histry Not Found".localized(), title: "", controller: self)
                 }else{
                     objAlert.showAlert(message: message ?? "", title: "", controller: self)
                 }

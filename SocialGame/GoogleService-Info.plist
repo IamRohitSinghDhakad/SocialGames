@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>401365978958-guamv91hu4kl78k15qa6bi0h5dq175vd.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCXc-Mwdzeb0PYkTmjgxpgRkEgzVDNFy9w</string>
+	<key>GCM_SENDER_ID</key>
+	<string>401365978958</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ios.SocialGames</string>
+	<key>PROJECT_ID</key>
+	<string>socialgame-3fa08</string>
+	<key>STORAGE_BUCKET</key>
+	<string>socialgame-3fa08.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:401365978958:ios:ff4254a0c31e204b5f181f</string>
+</dict>
+</plist>

@@ -11,11 +11,33 @@ class ForgotPasswordViewController: UIViewController {
     
     @IBOutlet weak var lblDescription: UILabel!
     @IBOutlet weak var tfEmail: UITextField!
+    @IBOutlet weak var lblForgotPasswor: UILabel!
+    @IBOutlet weak var lblNoWorries: UILabel!
+    @IBOutlet weak var lblEmail: UILabel!
+    @IBOutlet weak var btnOnSend: UIButton!
+    @IBOutlet weak var lblBackTo: UILabel!
+    @IBOutlet weak var lblLogin: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setLanguageText()
+    }
+    
+    func setLanguageText(){
+        self.lblForgotPasswor.text = "Forgot Password".localized()
+        self.lblNoWorries.text = "No worries, We'll send you\nreset instruction on your email\naccount.".localized()
+        self.lblEmail.text = "Email".localized()
+        self.btnOnSend.setTitle("Send".localized(), for: .normal)
+        self.lblBackTo.text = "Back to".localized()
+        self.lblLogin.text = "Login!".localized()
+    }
+    
     
     @IBAction func btnOnSend(_ sender: Any) {
         
