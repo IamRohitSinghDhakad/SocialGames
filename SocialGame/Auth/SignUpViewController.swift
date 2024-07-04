@@ -30,6 +30,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var btnRegister: UIButton!
     @IBOutlet weak var lblAlreadyHaveaAccount: UILabel!
     @IBOutlet weak var lblLoginNow: UILabel!
+    @IBOutlet weak var imgVwEULA: UIImageView!
     
     
     var strSelectGender = ""
@@ -44,7 +45,6 @@ class SignUpViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         setLanguageText()
     }
     
@@ -63,12 +63,17 @@ class SignUpViewController: UIViewController {
         
         self.lblAlreadyHaveaAccount.text = "Already have an account".localized()
         self.lblLoginNow.text = "Login!".localized()
-        
-        
-        
-        
     }
 
+    
+    @IBAction func btnGoToEULA(_ sender: Any) {
+        self.pushVc(viewConterlerId: "EULAViewController")
+    }
+    
+    @IBAction func btnAcceptEULA(_ sender: Any) {
+        self.imgVwEULA.image = self.imgVwEULA.image == UIImage(named: "select") ? UIImage(named: "box") : UIImage(named: "select")
+    }
+    
     @IBAction func btnOnRegister(_ sender: Any) {
         if self.validateFields(){
             self.call_WsRegisterUser()
@@ -189,6 +194,11 @@ class SignUpViewController: UIViewController {
 //            return false
 //        }
 
+        guard self.imgVwEULA.image == UIImage(named: "select") else {
+               // Show an error message for not agreeing to the EULA
+               objAlert.showAlert(message: "Please Agree to the EULA Terms and Conditions".localized(), controller: self)
+               return false
+           }
         // All validations pass
         return true
     }

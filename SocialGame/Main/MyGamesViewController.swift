@@ -104,8 +104,8 @@ extension MyGamesViewController : UITableViewDelegate, UITableViewDataSource{
     
     @objc func btnAcceptAction(sender: UIButton){
         let buttonTag = sender.tag
+        self.call_AcceptRequest_Api(strGame_id: self.arrMyGamesPlayers[buttonTag].game_id ?? "", strUser_id: self.arrMyGamesPlayers[buttonTag].user_id ?? "")
         
-        print(buttonTag)
     }
     
     @objc func btnChatAction(sender: UIButton){
@@ -156,6 +156,7 @@ extension MyGamesViewController{
             
             if status == MessageConstant.k_StatusCode{
                 if let user_details  = response["result"] as? [[String:Any]] {
+                    self.arrMyGamesPlayers.removeAll()
                     for data in user_details{
                          let obj = GamePlayersModel.init(from: data)
                            self.arrMyGamesPlayers.append(obj)
@@ -163,6 +164,56 @@ extension MyGamesViewController{
                      self.tblVw.reloadData()
                     self.tblVw.displayBackgroundText(text: "")
                     
+                }
+                else {
+                    objAlert.showAlert(message: "Something went wrong!", title: "", controller: self)
+                }
+            }else{
+                objWebServiceManager.hideIndicator()
+                if let msgg = response["result"]as? String{
+                    
+                    self.tblVw.displayBackgroundText(text: "No Requests Comes Yet".localized())
+                    self.tblVw.reloadData()
+                   // objAlert.showAlert(message: msgg, title: "", controller: self)
+                }else{
+                    objAlert.showAlert(message: message ?? "", title: "", controller: self)
+                }
+            }
+            
+            
+        } failure: { (Error) in
+            //  print(Error)
+            objWebServiceManager.hideIndicator()
+        }
+    }
+    
+    
+    func call_AcceptRequest_Api(strGame_id:String,strUser_id:String){
+        
+        if !objWebServiceManager.isNetworkAvailable(){
+            objWebServiceManager.hideIndicator()
+            objAlert.showAlert(message: "No Internet Connection", title: "Alert", controller: self)
+            return
+        }
+        
+        objWebServiceManager.showIndicator()
+        
+        let dicrParam = ["game_id":strGame_id,
+                         "user_id":strUser_id]as [String:Any]
+        #if DEBUG
+        print(dicrParam)
+        #endif
+        objWebServiceManager.requestPost(strURL: WsUrl.url_AcceptRequest, queryParams: [:], params: dicrParam, strCustomValidation: "", showIndicator: false) { (response) in
+            objWebServiceManager.hideIndicator()
+            
+            let status = (response["status"] as? Int)
+            let message = (response["message"] as? String)
+            print(response)
+            
+            if status == MessageConstant.k_StatusCode{
+                if let user_details  = response["result"] as? [String:Any] {
+                    
+                    self.call_GetMyGame_Api(strGame_id: self.objGameData?.game_id ?? "")
                 }
                 else {
                     objAlert.showAlert(message: "Something went wrong!", title: "", controller: self)

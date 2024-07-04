@@ -26,6 +26,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var lblAnonymousLogin: UILabel!
     @IBOutlet weak var lblOrSignInVia: UILabel!
     @IBOutlet weak var lblSignInHeading: UILabel!
+    @IBOutlet weak var imgVw: UIImageView!
+    @IBOutlet weak var appleSignIn: UIView!
     
     var loginAnynomous : Bool?
     var socialLogin : Bool?
@@ -33,6 +35,7 @@ class LoginViewController: UIViewController {
     var strSocialType = ""
     var strSocialName = ""
     var strSocialEmail = ""
+    var isReadEULA = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +43,20 @@ class LoginViewController: UIViewController {
         //        GIDSignIn.sharedInstance.clientID = "401365978958-7t197g8ijcseo39ne4oedtknqk9febfa.apps.googleusercontent.com"
         //        GIDSignIn.sharedInstance.delegate = self
         // Do any additional setup after loading the view.
+        
+        // Optionally customize the button's appearance
+        // Ensure the button is of the correct type
+               let button = ASAuthorizationAppleIDButton(type: .signIn, style: .black)
+               button.translatesAutoresizingMaskIntoConstraints = false
+               button.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
+               
+               // Add the button to the view
+               self.appleSignIn.addSubview(button)
+       // appleSignIn.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
+    }
+    
+    @objc func handleAuthorizationAppleIDButtonPress() {
+        self.performAppleSignIn()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +64,21 @@ class LoginViewController: UIViewController {
         
         setLanguageText()
     }
+    
+    @IBAction func btnAcceptEULA(_ sender: Any) {
+        if isReadEULA == true {
+            self.imgVw.image = self.imgVw.image == UIImage(named: "select") ? UIImage(named: "box") : UIImage(named: "select")
+        }else{
+            objAlert.showAlert(message: "Please read EULA first", controller: self)
+        }
+       
+    }
+    
+    @IBAction func btnOnGoToEULAAggrement(_ sender: Any) {
+        isReadEULA = true
+        pushVc(viewConterlerId: "EULAViewController")
+    }
+    
     
     func setLanguageText(){
         self.lblSignInHeading.text = "Sign In".localized()
@@ -120,6 +152,12 @@ class LoginViewController: UIViewController {
             objAlert.showAlert(message: "Please Enter Password".localized(), controller: self)
             return false
         }
+        
+        guard self.imgVw.image == UIImage(named: "select") else {
+               // Show an error message for not agreeing to the EULA
+               objAlert.showAlert(message: "Please Agree to the EULA Terms and Conditions".localized(), controller: self)
+               return false
+           }
         
         // All validations pass
         return true

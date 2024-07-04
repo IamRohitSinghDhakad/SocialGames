@@ -70,9 +70,9 @@ class GameDetailViewController: UIViewController {
     
     func setLanguage(){
         self.lblHeading.text = "Game Detail".localized()
-        self.lblDate.text = "Date -".localized()
-        self.lblTime.text = "Time -".localized()
-        self.lblLocation.text = "Location -".localized()
+        self.lblDateHeading.text = "Date -".localized()
+        self.lblTimeHeading.text = "Time -".localized()
+        self.lblLocationHeading.text = "Location -".localized()
         self.btnRequestJoine.setTitle("Request For Join".localized(), for: .normal)
     }
     

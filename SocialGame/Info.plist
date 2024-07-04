@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSCameraUsageDescription</key>
-	<string>App Needs camera access to set profile picture</string>
+	<string>The app needs camera access to set your profile picture.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>App needs your location access for posting new games </string>
+	<string>We use your location to show nearby games and allow others to join. This enhances your experience by connecting you with local players.</string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 	<key>CFBundleURLTypes</key>
