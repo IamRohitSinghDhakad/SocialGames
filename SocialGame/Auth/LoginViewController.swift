@@ -111,6 +111,11 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func btnOnSocialLogin(_ sender: UIButton) {
+        guard self.imgVw.image == UIImage(named: "select") else {
+               // Show an error message for not agreeing to the EULA
+               objAlert.showAlert(message: "Please Agree to the EULA Terms and Conditions".localized(), controller: self)
+               return
+           }
         loginAnynomous = false
         switch sender.tag {
         case 0:
@@ -124,6 +129,11 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func btnOnAnonymousLogin(_ sender: Any) {
+        guard self.imgVw.image == UIImage(named: "select") else {
+               // Show an error message for not agreeing to the EULA
+               objAlert.showAlert(message: "Please Agree to the EULA Terms and Conditions".localized(), controller: self)
+               return
+           }
         loginAnynomous = true
         call_WsLogin()
     }
@@ -315,24 +325,42 @@ extension LoginViewController :  ASAuthorizationControllerDelegate, ASAuthorizat
 
 extension LoginViewController {
     
-    func performSignInWithGoogle(){
+    func performSignInWithGoogle() {
         // Start the sign in flow!
         
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
+            
+            if let error = error {
+                // If there's an error, show it in an alert
+                self.showAlert(with: "Sign In Error", message: error.localizedDescription)
+                return
+            }
+            
+            guard let signInResult = signInResult else {
+                // If signInResult is nil, show a generic error message
+                self.showAlert(with: "Sign In Error", message: "An unknown error occurred.")
+                return
+            }
+            
             self.socialLogin = true
-            print(error)
-            print(signInResult?.user.profile?.name)
-            print(signInResult?.user.profile?.givenName)
-            print(signInResult?.user.profile?.familyName)
-            print(signInResult?.user.idToken?.tokenString ?? "")
-            self.strSocialID = "\(signInResult?.user.idToken?.tokenString ?? "")"
+//            print(signInResult.user.profile?.name)
+//            print(signInResult.user.profile?.givenName)
+//            print(signInResult.user.profile?.familyName)
+//            print(signInResult.user.idToken?.tokenString ?? "")
+            self.strSocialID = "\(signInResult.user.idToken?.tokenString ?? "")"
             self.strSocialType = "google"
-            self.strSocialName = signInResult?.user.profile?.name ?? ""
-            self.strSocialEmail = signInResult?.user.profile?.email ?? ""
+            self.strSocialName = signInResult.user.profile?.name ?? ""
+            self.strSocialEmail = signInResult.user.profile?.email ?? ""
             self.call_WsLogin()
-            // check `error`; do something with `signInResult`
         }
     }
+
+    func showAlert(with title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+
     
     //    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!,
     //              withError error: Error!) {

@@ -69,6 +69,7 @@
 		F9B60A2C2C26EE620094A10E /* LocalizationSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B60A2B2C26EE620094A10E /* LocalizationSystem.swift */; };
 		F9C1DCCF2B81ECA100EEA285 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C1DCCE2B81ECA100EEA285 /* ResetPasswordViewController.swift */; };
 		F9C1DCD12B81EE1F00EEA285 /* WebVwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C1DCD02B81EE1E00EEA285 /* WebVwViewController.swift */; };
+		F9D47F1A2C4D664600D6EF6F /* EULAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D47F192C4D664600D6EF6F /* EULAViewController.swift */; };
 		F9DDE52E2B7BCA3000EE1A80 /* CategoriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9DDE52D2B7BCA3000EE1A80 /* CategoriesCell.xib */; };
 		F9DDE5302B7BCBBD00EE1A80 /* CategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DDE52F2B7BCBBD00EE1A80 /* CategoriesCell.swift */; };
 		F9EE6E642B7A9CA50030F596 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EE6E632B7A9CA50030F596 /* SignUpViewController.swift */; };
@@ -180,6 +181,7 @@
 		F9B60A352C26EE750094A10E /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F9C1DCCE2B81ECA100EEA285 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		F9C1DCD02B81EE1E00EEA285 /* WebVwViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebVwViewController.swift; sourceTree = "<group>"; };
+		F9D47F192C4D664600D6EF6F /* EULAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAViewController.swift; sourceTree = "<group>"; };
 		F9DDE52D2B7BCA3000EE1A80 /* CategoriesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoriesCell.xib; sourceTree = "<group>"; };
 		F9DDE52F2B7BCBBD00EE1A80 /* CategoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCell.swift; sourceTree = "<group>"; };
 		F9EE6E632B7A9CA50030F596 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				F97C06002B7A8A1100793360 /* SelectLanguageTableViewCell.swift */,
 				F97C06032B7A99A600793360 /* ForgotPasswordViewController.swift */,
 				F9EE6E632B7A9CA50030F596 /* SignUpViewController.swift */,
+				F9D47F192C4D664600D6EF6F /* EULAViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -611,6 +614,7 @@
 				F9EE6E692B7AA40C0030F596 /* HomeViewController.swift in Sources */,
 				F97C05C62B7A7A3D00793360 /* LoginViewController.swift in Sources */,
 				F97C05E82B7A7C5B00793360 /* CategoryModel.swift in Sources */,
+				F9D47F1A2C4D664600D6EF6F /* EULAViewController.swift in Sources */,
 				F91269952B80E22F00C82251 /* CategoryListViewController.swift in Sources */,
 				F9B60A2C2C26EE620094A10E /* LocalizationSystem.swift in Sources */,
 				F97DF7852B87639D00E7BB66 /* Location.swift in Sources */,
