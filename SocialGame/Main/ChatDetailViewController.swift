@@ -17,7 +17,7 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet var hgtConsMinimum: NSLayoutConstraint!
     @IBOutlet weak var vwBlocked: UIView!
     @IBOutlet weak var lblBlockMessage: UILabel!
-    
+    @IBOutlet weak var vwClearConversation: UIView!
     
     
     let txtViewCommentMaxHeight: CGFloat = 100
@@ -44,17 +44,20 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         tblChatList.dataSource = self
         self.txtVwChat.delegate = self
         
-        if self.timer == nil{
-            self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
-        }else{
-            
-        }
-        print(isBlocked)
-        if self.isBlocked == "1"{
-            self.vwBlocked.isHidden = false
-        }else{
-            self.vwBlocked.isHidden = true
-        }
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(sender:)))
+        self.tblChatList.addGestureRecognizer(longPress)
+        
+//        if self.timer == nil{
+//            self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+//        }else{
+//            
+//        }
+//        print(isBlocked)
+//        if self.isBlocked == "1"{
+//            self.vwBlocked.isHidden = false
+//        }else{
+//            self.vwBlocked.isHidden = true
+//        }
         
     }
     
@@ -63,6 +66,7 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         DispatchQueue.main.async {
             self.vwHeader.setCornerRadiusIndiviualCorners(radius: 30.0, corners: [.bottomLeft, .bottomRight])
         }
+        self.call_GetProfile(strUserID: self.strSenderId)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -82,6 +86,13 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         return 1
     }
     
+    @IBAction func btnClearConversation(_ sender: Any) {
+        objAlert.showAlertCallBack(alertLeftBtn: "Yes", alertRightBtn: "No", title: "", message: "You want to delete the chat with \(self.strUsername) ?", controller: self) {
+            self.timer?.invalidate()
+            self.timer = nil
+            self.call_ClearConversation(strUserID: objAppShareData.UserDetail.strUserId ?? "", strProductID: self.strProductId)
+        }
+    }
     
     @IBAction func btnOnBlockUser(_ sender: Any) {
         
@@ -92,18 +103,19 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         let reportAction = UIAlertAction(title: "Report".localized(), style: .destructive) { action in
             // Handle the report action here
             print("User chose to report")
-            // You can navigate to the report screen or show another dialog here
-            self.call_ReportUser_Api(userID: self.strSenderId)
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ReportViewController")as! ReportViewController
+            vc.strUser_id = self.strSenderId
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         actionSheet.addAction(reportAction)
 
         // Add the "Block" or "Unblock" action based on the isBlocked status
-        if self.isBlocked == "1" {
+        if self.isBlocked == "true" {
             let unblockAction = UIAlertAction(title: "Unblock".localized(), style: .destructive) { action in
                 // Handle the unblock action here
                 print("User chose to unblock")
                 // You can handle the unblocking logic here
-                self.call_BlockUser_Api(userID: self.strSenderId)
+                self.call_blockUnblockeUser(strUserID: self.strSenderId)
                 // self.vwBlocked.isHidden = true
                 // self.lblBlockMessage.text = "User Unblocked".localized()
             }
@@ -113,7 +125,7 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
                 // Handle the block action here
                 print("User chose to block")
                 // You can handle the blocking logic here
-                self.call_BlockUser_Api(userID: self.strSenderId)
+                self.call_blockUnblockeUser(strUserID: self.strSenderId)
                 // self.vwBlocked.isHidden = false
                 // self.lblBlockMessage.text = "User Blocked".localized()
             }
@@ -216,6 +228,64 @@ class ChatDetailViewController: UIViewController, UITableViewDelegate, UITableVi
         return cell
     }
     
+    @objc private func handleLongPress(sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            let touchPoint = sender.location(in: tblChatList)
+            if let indexPath = tblChatList.indexPathForRow(at: touchPoint) {
+                print(indexPath.row)
+                // your code here, get the row for the indexPath or do whatever you want
+                
+                let id = self.arrChatMsg[indexPath.row].strSenderId
+                if id == objAppShareData.UserDetail.strUserId{
+                    self.openActionSheet(index: indexPath.row)
+                }
+            }
+        }
+    }
+    
+    
+    
+    func openActionSheet(index:Int){
+        
+        let actionsheet = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        
+        actionsheet.addAction(UIAlertAction(title: "Delete message", style: UIAlertAction.Style.default, handler: { (action) -> Void in
+         //Delete Message
+            
+            objAlert.showAlertCallBack(alertLeftBtn: "Yes", alertRightBtn: "No", title: "", message: "Do you want to delete this message?", controller: self) {
+                let msgID = self.arrChatMsg[index].strMsgIDForDelete
+                let rec_ID = self.arrChatMsg[index].strSenderId
+                self.call_DeleteChatMsgSinle(strUserID: rec_ID, strMsgID: msgID)
+                
+            }
+        }))
+        
+        actionsheet.addAction(UIAlertAction(title: "Copy message", style: UIAlertAction.Style.default, handler: { (action) -> Void in
+            //Copy Message
+            UIPasteboard.general.string = self.arrChatMsg[index].strOpponentChatMessage
+            objAlert.showAlert(message: "Copied text", title: "Alert", controller: self)
+            
+        }))
+        actionsheet.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.destructive, handler: { (action) -> Void in
+            
+        }))
+        self.present(actionsheet, animated: true, completion: nil)
+    }
+
+    
+    func updateTableContentInset() {
+        let numRows = self.tblChatList.numberOfRows(inSection: 0)
+        var contentInsetTop = self.tblChatList.bounds.size.height
+        for i in 0..<numRows {
+            let rowRect = self.tblChatList.rectForRow(at: IndexPath(item: i, section: 0))
+            contentInsetTop -= rowRect.size.height
+            if contentInsetTop <= 0 {
+                contentInsetTop = 0
+                break
+            }
+        }
+        self.tblChatList.contentInset = UIEdgeInsets(top: contentInsetTop,left: 0,bottom: 0,right: 0)
+    }
     
     
     @IBAction func btnSendMessage(_ sender: Any) {
@@ -308,24 +378,91 @@ extension ChatDetailViewController: UITextViewDelegate{
         self.txtVwChat.text = ""
     }
     
-    func updateTableContentInset() {
-        let numRows = self.tblChatList.numberOfRows(inSection: 0)
-        var contentInsetTop = self.tblChatList.bounds.size.height
-        for i in 0..<numRows {
-            let rowRect = self.tblChatList.rectForRow(at: IndexPath(item: i, section: 0))
-            contentInsetTop -= rowRect.size.height
-            if contentInsetTop <= 0 {
-                contentInsetTop = 0
-                break
-            }
-        }
-        self.tblChatList.contentInset = UIEdgeInsets(top: contentInsetTop,left: 0,bottom: 0,right: 0)
-    }
-    
 }
 
 
 extension ChatDetailViewController{
+    
+    // MARK:- Get Profile
+    
+    func call_GetProfile(strUserID: String) {
+        
+        if !objWebServiceManager.isNetworkAvailable(){
+            objWebServiceManager.hideIndicator()
+            objAlert.showAlert(message: "No Internet Connection", title: "Alert", controller: self)
+            return
+        }
+        
+      //  objWebServiceManager.showIndicator()
+        
+        let parameter = ["user_id" : strUserID, "login_id" : objAppShareData.UserDetail.strUserId ?? ""] as [String:Any]
+        
+        print(parameter)
+        
+        objWebServiceManager.requestPost(strURL: WsUrl.url_getUserProfile, queryParams: [:], params: parameter, strCustomValidation: "", showIndicator: false) { (response) in
+            
+            let status = (response["status"] as? Int)
+            let message = (response["message"] as? String)
+            objWebServiceManager.hideIndicator()
+            print(response)
+            
+            if status == MessageConstant.k_StatusCode{
+                
+                if let user_details  = response["result"] as? [String:Any] {
+                   print(user_details)
+                    var blockStatus = ""
+                    var blockedByMeStatus = ""
+                    if let status = user_details["blocked"]as? String{
+                        blockStatus = status
+                    }else  if let status = user_details["blocked"]as? Int{
+                        blockStatus = "\(status)"
+                    }
+                    
+                    if let status = user_details["blockedByYou"]as? String{
+                        blockedByMeStatus = status
+                    }else  if let status = user_details["blockedByYou"]as? Int{
+                        blockedByMeStatus = "\(status)"
+                    }
+                    
+                    print(blockStatus)
+                    print(blockedByMeStatus)
+                    
+                    if blockedByMeStatus == "1"{
+                        self.vwBlocked.isHidden = false
+                        self.vwClearConversation.isHidden = true
+                        self.lblBlockMessage.text = "You have blocked by this user"
+                        self.isBlocked = "false"
+                    }else if blockStatus == "1"{
+                        self.vwBlocked.isHidden = false
+                        self.lblBlockMessage.text = "You blocked this user"
+                        self.vwClearConversation.isHidden = true
+                        self.isBlocked = "true"
+                    }else{
+                        self.vwBlocked.isHidden = true
+                        self.isBlocked = "false"
+                        self.vwClearConversation.isHidden = false
+                        if self.timer == nil{
+                            self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+                        }else{
+                            
+                        }
+                    }
+                    
+                }
+                else {
+                    objWebServiceManager.hideIndicator()
+                }
+                
+            }else{
+                objWebServiceManager.hideIndicator()
+                objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
+                
+            }
+        } failure: { (Error) in
+            print(Error)
+            objWebServiceManager.hideIndicator()
+        }
+    }
     
     func call_GetChat(){
         if !objWebServiceManager.isNetworkAvailable(){
@@ -487,18 +624,14 @@ extension ChatDetailViewController{
             
             if let result = response["result"]as? String{
                 if result == "successful"{
-                    // self.isSendMessage = true
                     self.initilizeFirstTimeOnly = false
-                    // self.call_GetChatList(strUserID: objAppShareData.UserDetail.strUserId, strSenderID: self.strSenderID)
                 }else{
-                    objAlert.showAlert(message: "This user blocked you".localized(), controller: self)
+                    objAlert.showAlert(message: "Inappropriate content detected. Please modify your message.".localized(), controller: self)
                 }
             }else{
                 objWebServiceManager.hideIndicator()
-                // objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
                 
             }
-            
             
         } failure: { (Error) in
             print(Error)
@@ -554,6 +687,95 @@ extension UITableView {
 
 extension ChatDetailViewController{
     
+    //MARK:- Delete Singhe Message
+    func call_DeleteChatMsgSinle(strUserID:String, strMsgID:String){
+        
+        if !objWebServiceManager.isNetworkAvailable(){
+            objWebServiceManager.hideIndicator()
+            objAlert.showAlert(message: "No Internet Connection", title: "Alert", controller: self)
+            return
+        }
+        
+        objWebServiceManager.showIndicator()
+        
+        let parameter = ["user_id":strUserID,
+                         "chat_id":strMsgID]as [String:Any]
+        print(parameter)
+        
+        objWebServiceManager.requestPost(strURL: WsUrl.url_deleteChatSingleMessage, queryParams: [:], params: parameter, strCustomValidation: "", showIndicator: false) { (response) in
+            objWebServiceManager.hideIndicator()
+            let status = (response["status"] as? Int)
+            let message = (response["message"] as? String)
+            
+            print(response)
+            
+            if status == MessageConstant.k_StatusCode{
+                self.initilizeFirstTimeOnly = false
+                //self.call_GetChatList(strUserID: strUserID, strSenderID: self.strSenderID)
+                
+            }else{
+                objWebServiceManager.hideIndicator()
+                
+                if (response["result"]as? String) != nil{
+                   // self.tblChat.displayBackgroundText(text: "ningún record fue encontrado")
+                }else{
+                   // objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
+                }
+            }
+        } failure: { (Error) in
+            print(Error)
+            objWebServiceManager.hideIndicator()
+        }
+    }
+    
+    //MARK:- Clear Conversation Message
+    func call_ClearConversation(strUserID:String,strProductID:String){
+        
+        if !objWebServiceManager.isNetworkAvailable(){
+            objWebServiceManager.hideIndicator()
+            objAlert.showAlert(message: "No Internet Connection", title: "Alert", controller: self)
+            return
+        }
+        
+        objWebServiceManager.showIndicator()
+        
+        let parameter = ["sender_id":strSenderId,
+                         "receiver_id":strUserID,
+                         "product_id":strProductID]as [String:Any]
+        print(parameter)
+        
+        objWebServiceManager.requestPost(strURL: WsUrl.url_clearConversation, queryParams: [:], params: parameter, strCustomValidation: "", showIndicator: false) { (response) in
+            objWebServiceManager.hideIndicator()
+            let status = (response["status"] as? Int)
+            let message = (response["message"] as? String)
+            
+            print(response)
+            print(response)
+            
+            if (response["result"]as? Int) != nil{
+                objAlert.showAlertSingleButtonCallBack(alertBtn: "OK", title: "History Deleted", message: "Chat History deleted", controller: self) {
+                    self.onBackPressed()
+                }
+            }
+            
+            if status == MessageConstant.k_StatusCode{
+                
+               
+                
+            }else{
+                objWebServiceManager.hideIndicator()
+                
+                if (response["result"]as? String) != nil{
+                    self.tblChatList.displayBackgroundText(text: "ningún record fue encontrado")
+                }else{
+                    objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
+                }
+            }
+        } failure: { (Error) in
+            print(Error)
+            objWebServiceManager.hideIndicator()
+        }
+    }
     
     func call_ReportUser_Api(userID: String){
         
@@ -609,8 +831,8 @@ extension ChatDetailViewController{
         }
     }
     
-    
-    func call_BlockUser_Api(userID: String){
+    //MARK: Block API
+    func call_blockUnblockeUser(strUserID: String) {
         
         if !objWebServiceManager.isNetworkAvailable(){
             objWebServiceManager.hideIndicator()
@@ -618,56 +840,57 @@ extension ChatDetailViewController{
             return
         }
         
-        objWebServiceManager.showIndicator()
+        let parameter = ["blocked_by":objAppShareData.UserDetail.strUserId ?? "","user_id":strUserID] as [String:Any]
+       // let parameter = ["blocked_by":strUserID,"user_id":objAppShareData.UserDetail.strUser_id] as [String:Any]
         
-        let dicrParam = ["user_id":userID,
-                         "blocked_by":objAppShareData.UserDetail.strUserId!]as [String:Any]
-        
-        objWebServiceManager.requestGet(strURL: WsUrl.url_BlockUser, params: dicrParam, queryParams: [:], strCustomValidation: "") { (response) in
-            objWebServiceManager.hideIndicator()
+        print(parameter)
+        objWebServiceManager.requestPost(strURL: WsUrl.url_BlockUser, queryParams: [:], params: parameter, strCustomValidation: "", showIndicator: false) { (response) in
             
             let status = (response["status"] as? Int)
             let message = (response["message"] as? String)
+            objWebServiceManager.hideIndicator()
             print(response)
             
             if status == MessageConstant.k_StatusCode{
+                
                 if let user_details  = response["result"] as? [String:Any] {
+                   print(user_details)
                     
-                    let confirmationDialog = UIAlertController(title: "User Blocked".localized(), message: "".localized(), preferredStyle: .alert)
                     
-                    let okAction = UIAlertAction(title: "OK".localized(), style: .default) { _ in
-                        // Navigate to the previous page
-                        self.navigationController?.popViewController(animated: true)
+                    if let unblockedStatus = user_details["unblocked"]as? Int{
+                        self.vwBlocked.isHidden = true
+                        self.vwClearConversation.isHidden = false
+                        self.isBlocked = "false"
+                        if self.timer == nil{
+                            self.timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.updateTimer), userInfo: nil, repeats: true)
+                        }else{
+                            
+                        }
+                    }
+                    else{
+                        self.isBlocked = "true"
+                        self.vwBlocked.isHidden = false
+                        self.vwClearConversation.isHidden = true
+                        self.timer?.invalidate()
+                        self.timer = nil
                     }
                     
-                    confirmationDialog.addAction(okAction)
-                    self.present(confirmationDialog, animated: true, completion: nil)
-                    
+                   // self.call_GetProfile(strUserID: objAppShareData.UserDetail.strUser_id)
+                  
+                  
                     
                 }
                 else {
-                    let confirmationDialog = UIAlertController(title: "User Unblocked".localized(), message: "".localized(), preferredStyle: .alert)
-                    
-                    let okAction = UIAlertAction(title: "OK".localized(), style: .default) { _ in
-                        // Navigate to the previous page
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                    
-                    confirmationDialog.addAction(okAction)
-                    self.present(confirmationDialog, animated: true, completion: nil)
+                    objWebServiceManager.hideIndicator()
                 }
+                
             }else{
                 objWebServiceManager.hideIndicator()
-                if let msgg = response["result"]as? String{
-                    objAlert.showAlert(message: msgg, title: "", controller: self)
-                }else{
-                    objAlert.showAlert(message: message ?? "", title: "", controller: self)
-                }
+                objAlert.showAlert(message: message ?? "", title: "Alert", controller: self)
+                
             }
-            
-            
         } failure: { (Error) in
-            //  print(Error)
+            print(Error)
             objWebServiceManager.hideIndicator()
         }
     }

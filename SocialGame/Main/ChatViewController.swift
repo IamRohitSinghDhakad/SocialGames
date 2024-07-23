@@ -15,6 +15,7 @@ class ChatViewController: UIViewController {
     
     
     var arrUserList = [StoreModel]()
+    var currentOptionsCell: ChatListTableViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +59,22 @@ extension ChatViewController : UITableViewDataSource, UITableViewDelegate {
         cell.lblLastMessage.text = obj.last_message
         cell.lblTimeAgo.text = obj.time_ago
         
+        // Add long press gesture to the cell
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
+        cell.addGestureRecognizer(longPressGesture)
+        
+        // Add action for cancel button
+        cell.btnCancel.tag = indexPath.row
+        cell.btnCancel.addTarget(self, action: #selector(cancelButtonClicked(_:)), for: .touchUpInside)
+        
+//        // Add action for Report button
+//        cell.btnReportUser.tag = indexPath.row
+//        cell.btnReportUser.addTarget(self, action: #selector(reportButtonClicked(_:)), for: .touchUpInside)
+//        
+        // Add action for Report button
+        cell.btnDelete.tag = indexPath.row
+        cell.btnDelete.addTarget(self, action: #selector(deleteButtonClicked(_:)), for: .touchUpInside)
+        
         return cell
     }
     
@@ -71,6 +88,44 @@ extension ChatViewController : UITableViewDataSource, UITableViewDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
+           if gesture.state == .began {
+               let touchPoint = gesture.location(in: self.tblVw)
+               if let indexPath = tblVw.indexPathForRow(at: touchPoint) {
+                   let cell = tblVw.cellForRow(at: indexPath) as! ChatListTableViewCell
+                   // Hide the currently visible options view if any
+                   currentOptionsCell?.hideOptions()
+                   // Show the new options view
+                   cell.showOptions()
+                   // Update the currently visible options cell
+                   currentOptionsCell = cell
+               }
+           }
+       }
+       
+       @objc func cancelButtonClicked(_ sender: UIButton) {
+           if let cell = sender.getParentTableViewCell() as? ChatListTableViewCell {
+               cell.hideOptions()
+               // Clear the reference if the current cell's options view is being hidden
+               if currentOptionsCell == cell {
+                   currentOptionsCell = nil
+               }
+           }
+       }
+    
+    @objc func deleteButtonClicked(_ sender: UIButton) {
+        if let cell = sender.getParentTableViewCell() as? ChatListTableViewCell {
+            cell.hideOptions()
+            // Clear the reference if the current cell's options view is being hidden
+            if currentOptionsCell == cell {
+                currentOptionsCell = nil
+            }
+        }
+        objAlert.showAlertCallBack(alertLeftBtn: "Yes".localized(), alertRightBtn: "No".localized(), title: "", message: "Are you sure you want to delete chat history with this user ?".localized(), controller: self) {
+            self.call_ClearConversation(strSenderID: self.arrUserList[sender.tag].sender_id ?? "", strReceiverID: self.arrUserList[sender.tag].receiver_id ?? "", strProductID: self.arrUserList[sender.tag].product_id ?? "")
+        }
+        
+    }
 }
 
 
@@ -125,5 +180,57 @@ extension ChatViewController{
             //  print(Error)
             objWebServiceManager.hideIndicator()
         }
+    }
+    
+    
+    //MARK:- Delete Singhe Message
+    func call_ClearConversation(strSenderID:String, strReceiverID:String,strProductID:String){
+        
+        if !objWebServiceManager.isNetworkAvailable(){
+            objWebServiceManager.hideIndicator()
+            objAlert.showAlert(message: "No Internet Connection", title: "Alert", controller: self)
+            return
+        }
+        
+        objWebServiceManager.showIndicator()
+        
+        let parameter = ["sender_id":strSenderID,
+                         "receiver_id":strReceiverID,
+                         "product_id":strProductID,
+                         "delete_conversation":"1"]as [String:Any]
+        print(parameter)
+        
+        objWebServiceManager.requestGet(strURL: WsUrl.url_clearConversation, params: parameter, queryParams: [:], strCustomValidation: "") { (response) in
+            objWebServiceManager.hideIndicator()
+            let status = (response["status"] as? Int)
+            let message = (response["message"] as? String)
+            
+            print(response)
+            
+            if status == MessageConstant.k_StatusCode{
+                
+                self.call_GetUserList_Api()
+               
+                
+            }else{
+                objWebServiceManager.hideIndicator()
+            }
+        } failure: { (Error) in
+            print(Error)
+            objWebServiceManager.hideIndicator()
+        }
+    }
+}
+
+extension UIView {
+    func getParentTableViewCell() -> UITableViewCell? {
+        var view = self
+        while let superview = view.superview {
+            if let cell = superview as? UITableViewCell {
+                return cell
+            }
+            view = superview
+        }
+        return nil
     }
 }

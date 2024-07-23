@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1AE4C52C4FCE9100EE63D6 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1AE4C42C4FCE9100EE63D6 /* ReportViewController.swift */; };
 		0A8F170F63189812D3D59833 /* Pods_SocialGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C15522EFCBCC0F0281E0D1 /* Pods_SocialGame.framework */; };
 		F90348BC2B83E24100137012 /* MapLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90348BB2B83E24100137012 /* MapLocationViewController.swift */; };
 		F90348C02B862CE900137012 /* GetGameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90348BF2B862CE900137012 /* GetGameModel.swift */; };
@@ -88,6 +89,7 @@
 
 /* Begin PBXFileReference section */
 		07C15522EFCBCC0F0281E0D1 /* Pods_SocialGame.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialGame.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A1AE4C42C4FCE9100EE63D6 /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		A827CA4965BFC4C690FC1F91 /* Pods-SocialGame.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialGame.release.xcconfig"; path = "Target Support Files/Pods-SocialGame/Pods-SocialGame.release.xcconfig"; sourceTree = "<group>"; };
 		D32D5BDC242359A370F24482 /* Pods-SocialGame.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialGame.debug.xcconfig"; path = "Target Support Files/Pods-SocialGame/Pods-SocialGame.debug.xcconfig"; sourceTree = "<group>"; };
 		F90348BB2B83E24100137012 /* MapLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationViewController.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				F9B1192F2B827F3C00F6CF91 /* ChatDetailViewController.swift */,
 				F90348BB2B83E24100137012 /* MapLocationViewController.swift */,
 				F938A72B2B88FB20009B13FD /* ContactUsViewController.swift */,
+				0A1AE4C42C4FCE9100EE63D6 /* ReportViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 				F9C1DCCF2B81ECA100EEA285 /* ResetPasswordViewController.swift in Sources */,
 				F9B119322B8282D300F6CF91 /* ChatDetailModel.swift in Sources */,
 				F9EE6E6B2B7AA41A0030F596 /* GamesViewController.swift in Sources */,
+				0A1AE4C52C4FCE9100EE63D6 /* ReportViewController.swift in Sources */,
 				F97C05EA2B7A7C5B00793360 /* StoreModel.swift in Sources */,
 				F97DF7872B87639D00E7BB66 /* SearchHistoryManager.swift in Sources */,
 				F97C05E72B7A7C5B00793360 /* RegistrationModel.swift in Sources */,
