@@ -582,6 +582,8 @@ extension ChatDetailViewController{
                     objAlert.showAlert(message: "Something went wrong!", title: "", controller: self)
                 }
             }else{
+                self.arrChatMsg.removeAll()
+                self.tblChatList.reloadData()
                 objWebServiceManager.hideIndicator()
                 if let msgg = response["result"]as? String{
                     // objAlert.showAlert(message: msgg, title: "", controller: self)

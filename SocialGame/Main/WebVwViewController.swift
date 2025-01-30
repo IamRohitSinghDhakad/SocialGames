@@ -28,7 +28,7 @@ class WebVwViewController: UIViewController {
         var loadUrl = ""
         switch isComingfrom {
         case "Privacy Policy":
-            loadUrl = "page/Privacy"
+            loadUrl = "https://tradexwebtrader.theplatformapi.com/home"
         case "About Us":
             loadUrl = "page/About%20us"
         default:

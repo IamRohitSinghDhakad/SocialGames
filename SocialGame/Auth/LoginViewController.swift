@@ -193,7 +193,7 @@ extension LoginViewController {
         
         var url = ""
         
-        if loginAnynomous!{
+        if loginAnynomous == true{
             
             dicrParam = ["device_type":"IOS",
                          "device_id":objAppShareData.uuidString,

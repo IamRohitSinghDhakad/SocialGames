@@ -2569,6 +2569,12 @@
                                                     <action selector="btnOnSubmit:" destination="K5a-oi-U9w" eventType="touchUpInside" id="W5u-Xs-udg"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can write mail to us :- safaksarica1907@hotmail.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7g-YY-7wE">
+                                                <rect key="frame" x="20" y="521" width="335" height="13.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -2576,6 +2582,7 @@
                                             <constraint firstAttribute="trailing" secondItem="EeO-MN-kWX" secondAttribute="trailing" constant="20" symbolic="YES" id="39X-pg-cCz"/>
                                             <constraint firstItem="x2n-dP-ftu" firstAttribute="top" secondItem="Gma-dZ-szc" secondAttribute="top" constant="30" id="7ii-cF-H3i"/>
                                             <constraint firstItem="Buh-du-bZ0" firstAttribute="leading" secondItem="Gma-dZ-szc" secondAttribute="leading" constant="20" symbolic="YES" id="7oT-Xx-iTh"/>
+                                            <constraint firstAttribute="bottom" secondItem="k7g-YY-7wE" secondAttribute="bottom" constant="20" id="GUC-Mm-Fq2"/>
                                             <constraint firstItem="4Lh-mC-Src" firstAttribute="leading" secondItem="Gma-dZ-szc" secondAttribute="leading" constant="20" symbolic="YES" id="HI3-Ck-fd6"/>
                                             <constraint firstItem="4Lh-mC-Src" firstAttribute="top" secondItem="EeO-MN-kWX" secondAttribute="bottom" constant="30" id="IeQ-nn-W60"/>
                                             <constraint firstItem="6qd-fj-5Uo" firstAttribute="leading" secondItem="Gma-dZ-szc" secondAttribute="leading" constant="20" symbolic="YES" id="NJc-mk-DUK"/>
@@ -2593,6 +2600,8 @@
                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="4Lh-mC-Src" secondAttribute="bottom" constant="20" id="r13-ub-pQ1"/>
                                             <constraint firstAttribute="trailing" secondItem="6qd-fj-5Uo" secondAttribute="trailing" constant="20" symbolic="YES" id="rMr-Kv-SNK"/>
                                             <constraint firstAttribute="trailing" secondItem="eK9-4v-m61" secondAttribute="trailing" constant="20" symbolic="YES" id="rww-Mq-Vd7"/>
+                                            <constraint firstItem="k7g-YY-7wE" firstAttribute="leading" secondItem="Gma-dZ-szc" secondAttribute="leading" constant="20" id="uvr-gi-CTP"/>
+                                            <constraint firstAttribute="trailing" secondItem="k7g-YY-7wE" secondAttribute="trailing" constant="20" id="v2d-Ly-8v6"/>
                                             <constraint firstItem="eK9-4v-m61" firstAttribute="top" secondItem="6qd-fj-5Uo" secondAttribute="bottom" constant="15" id="yeV-eJ-g1N"/>
                                         </constraints>
                                     </view>
@@ -2705,7 +2714,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="112.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CREATE GAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIl-Bv-Dh9">
-                                        <rect key="frame" x="111.5" y="69.5" width="152" height="25"/>
+                                        <rect key="frame" x="108" y="69.5" width="159.5" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="piX-PU-d0j"/>
                                         </constraints>
@@ -4444,7 +4453,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tP8-Tz-LtV">
                                                                 <rect key="frame" x="8" y="31.5" width="319" height="136.5"/>
                                                                 <subviews>
-                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Gqs-LQ-5To" customClass="RDTextView" customModule="SafeCallerApp" customModuleProvider="target">
+                                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Gqs-LQ-5To" customClass="RDTextView" customModule="SocialGame" customModuleProvider="target">
                                                                         <rect key="frame" x="5" y="5" width="309" height="126.5"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <color key="textColor" systemColor="labelColor"/>
@@ -4588,7 +4597,7 @@
     </scenes>
     <designables>
         <designable name="3Un-pm-jCg">
-            <size key="intrinsicContentSize" width="4" height="15.5"/>
+            <size key="intrinsicContentSize" width="4" height="18"/>
         </designable>
         <designable name="8K3-Qe-xKg">
             <size key="intrinsicContentSize" width="92" height="18.5"/>
@@ -4637,7 +4646,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
